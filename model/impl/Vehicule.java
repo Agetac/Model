@@ -1,17 +1,20 @@
-package org.agetac.common;
+package org.agetac.model.impl;
 
+import org.agetac.common.EtatVehicule;
+import org.agetac.model.sign.AbstractModel;
+import org.agetac.model.sign.IJsonable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Vehicule extends Moyen {
+public class Vehicule extends AbstractModel {
 
+	private Caserne caserne;
 	private EtatVehicule etat;
 	private Groupe groupe;
-	private String uniqueID;
 
-	public Vehicule(String nom, Position position,
-			EtatVehicule etat, Groupe groupe) {
-		super(nom, position);
+	public Vehicule(String uid, String nom, Position position, Caserne caserne, EtatVehicule etat, Groupe groupe) {
+		super(uid, nom, position);
+		this.caserne = caserne;
 		this.etat = etat;
 		this.groupe = groupe;
 	}
@@ -19,12 +22,20 @@ public class Vehicule extends Moyen {
 	public Vehicule(JSONObject json) {
 		super(json);
 		try {
-			this.uniqueID = json.getString("uniqueID");
-			this.etat = new EtatVehicule(json.getJSONObject("etat"));
+			this.caserne = new Caserne(json.getJSONObject("caserne"));
+			this.etat = EtatVehicule.valueOf(json.getString("etat"));
 			this.groupe = new Groupe(json.getJSONObject("groupe"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public Caserne getCaserne() {
+		return caserne;
+	}
+	
+	public void setCaserne(Caserne caserne) {
+		this.caserne = caserne;
 	}
 
 	public EtatVehicule getEtat() {
@@ -61,21 +72,23 @@ public class Vehicule extends Moyen {
 	 * Convert this object to a JSON object for representation
 	 */
 	public JSONObject toJSON() {
+		JSONObject json = null;
+		
 		try {
-			JSONObject jsonobj = super.toJSON();
-			jsonobj.put("etat", this.etat);
-			jsonobj.put("groupe", this.groupe);
-			return jsonobj;
+			json = super.toJson();
+			json.put("etat", this.etat.name());
+			json.put("groupe", this.groupe);
+			
 		} catch (Exception e) {
-			return null;
+			e.printStackTrace();
 		}
-	}
-	
-	public String getUniqueId() {
-		return this.uniqueID;
+		
+		return json;
 	}
 
-	public void setId(String uniqueID) {
-		this.uniqueID = uniqueID;
+	@Override
+	public IJsonable fromJson(JSONObject json) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

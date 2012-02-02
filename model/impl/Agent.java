@@ -1,59 +1,46 @@
-package org.agetac.common;
+package org.agetac.model.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.agetac.common.Aptitude;
+import org.agetac.model.sign.AbstractModel;
+import org.agetac.model.sign.IJsonable;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Agent {
+public class Agent extends AbstractModel {
 
-	private String nom;
 	private Aptitude aptitude;
+	private List<Agent> subordonnes;
 
-	private List<Agent> subordonnes = null;
-	private String uniqueID;
-	
 	public Agent() {
-		super();
-		this.nom = "";
+		super(null, null, null);
 		this.aptitude = null;
 		this.subordonnes = null;
 	}
-	
-	public Agent(String uniqueID, String nom, Aptitude aptitude, 
-			List<Agent> subordonnes) {
-		super();
-		this.nom = nom;
+
+	public Agent(String uid, String name, Aptitude aptitude, List<Agent> subordonnes) {
+		super(uid, name, null);
 		this.aptitude = aptitude;
 		this.subordonnes = subordonnes;
-		this.uniqueID = uniqueID;
 	}
+
 	public Agent(JSONObject json) {
+		super(json);
+		
 		try {
-			this.uniqueID = json.getString("uniqueID");
-			this.nom = json.getString("nom");
-			this.aptitude = new Aptitude(json.getString("aptitude"));
-			//this.subordonnes = (List<Agent>) json.get("subordonnes");
+			this.aptitude = Aptitude.valueOf(json.getString("aptitude"));
+			JSONArray array = json.getJSONArray("subordonnes");
+			this.subordonnes = new ArrayList<Agent>();
+			for (int i=0; i<array.length(); i++) {
+				this.subordonnes.add(new Agent(array.getJSONObject(i)));
+			}
+
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public String getUniqueId() {
-		return this.uniqueID;
-	}
-
-	public void setId(String uniqueID) {
-		this.uniqueID = uniqueID;
-	}
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
 	}
 
 	public Aptitude getAptitude() {
@@ -78,10 +65,6 @@ public class Agent {
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("[Agent ");
-		sb.append("uniqueID:");
-		sb.append(this.uniqueID);
-		sb.append(",nom:");
-		sb.append(this.nom);
 		sb.append(",aptitude:");
 		sb.append(this.aptitude);
 		sb.append(",subordonnes:");
@@ -94,19 +77,21 @@ public class Agent {
 	 * Convert this object to a JSON object for representation
 	 */
 	public JSONObject toJson() {
-		JSONObject json = new JSONObject();
+		JSONObject json = super.toJson();
+		
 		try {
-			json.put("uniqueID", this.uniqueID);
-			json.put("nom", this.nom);
-			json.put("aptitude", this.aptitude);
+			json.put("aptitude", aptitude.name());
 			json.put("subordonnes", this.subordonnes);
+
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		System.out.println("test "+json.toString());
 		return json;
+	}
+
+	@Override
+	public IJsonable fromJson(JSONObject json) {
+		return new Agent(json);
 	}
 
 }

@@ -1,9 +1,12 @@
-package org.agetac.common;
+package org.agetac.model.impl;
 
+import org.agetac.model.sign.IJsonable;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.osmdroid.api.IGeoPoint;
 
-public class Position {
+public class Position implements IJsonable {
+	
 	private double longitude;
 	private double latitude;
 
@@ -48,5 +51,10 @@ public class Position {
 			e.printStackTrace();
 		}
 		return json;
+	}
+
+	@Override
+	public IJsonable fromJson(JSONObject json) {
+		return new Position(json);
 	}
 }

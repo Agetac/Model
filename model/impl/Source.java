@@ -1,17 +1,22 @@
-package org.agetac.common;
+package org.agetac.model.impl;
 
+import org.agetac.model.sign.IJsonable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Action {
+public class Source implements IJsonable {
+
+	private String uniqueID;
 	private Position position;
 
-	public Action(Position position) {
+	public Source(String uniqueId, Position position) {
+		this.uniqueID = uniqueId;
 		this.position = position;
 	}
 	
-	public Action(JSONObject json){
+	public Source(JSONObject json){
 		try {
+			this.setUniqueID(json.getString("uniqueID"));
 			this.position = new Position(json.getJSONObject("position"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -37,11 +42,25 @@ public class Action {
 	public JSONObject toJson(){
 		JSONObject json = new JSONObject();
 		try {
+			json.put("uniqueID", this.uniqueID);
 			json.put("position", position.toJson());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return json;
+	}
+
+	@Override
+	public IJsonable fromJson(JSONObject json) {
+		return new Source(json);
+	}
+
+	
+	public void setUniqueID(String uniqueId) {
+		this.uniqueID = uniqueId;
+	}
+	public String getUniqueID() {
+		return this.uniqueID;
 	}
 }
