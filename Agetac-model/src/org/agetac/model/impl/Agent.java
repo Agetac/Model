@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 public class Agent extends AbstractModel {
 
-	enum Aptitude {
+	public enum Aptitude {
 	    COS,
 	    CA,
 	    CDG,
