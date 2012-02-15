@@ -1,5 +1,7 @@
 package org.agetac.model.impl;
 
+import java.util.HashMap;
+
 import org.agetac.model.sign.AbstractModel;
 import org.agetac.model.sign.IJsonable;
 import org.json.JSONException;
@@ -14,12 +16,17 @@ public class Vehicule extends AbstractModel {
 	private Caserne caserne;
 	private EtatVehicule etat;
 	private Groupe groupe;
+	private HashMap<String, String> groupesHoraires; 
 
 	public Vehicule(String uid, String nom, Position position, Caserne caserne, EtatVehicule etat, Groupe groupe) {
 		super(uid, nom, position);
 		this.caserne = caserne;
 		this.etat = etat;
 		this.groupe = groupe;
+		this.groupesHoraires = new HashMap<String, String>();
+		groupesHoraires.put("demande", "");
+		groupesHoraires.put("arrivee", "");
+		groupesHoraires.put("depart", "");
 	}
 	
 	public Vehicule(JSONObject json) {
@@ -28,6 +35,7 @@ public class Vehicule extends AbstractModel {
 			this.caserne = new Caserne(json.getJSONObject("caserne"));
 			this.etat = EtatVehicule.valueOf(json.getString("etat"));
 			this.groupe = new Groupe(json.getJSONObject("groupe"));
+			// vu que Marie et Gildas ont rajouté groupesHoraires il faudrait compléter
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -55,6 +63,14 @@ public class Vehicule extends AbstractModel {
 
 	public void setGroupe(Groupe groupe) {
 		this.groupe = groupe;
+	}
+
+	public HashMap<String, String> getGroupesHoraires() {
+		return groupesHoraires;
+	}
+
+	public void setGroupesHoraires(HashMap<String, String> groupesHoraires) {
+		this.groupesHoraires = groupesHoraires;
 	}
 
 	/**
