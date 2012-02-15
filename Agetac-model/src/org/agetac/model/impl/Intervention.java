@@ -77,9 +77,10 @@ public class Intervention extends AbstractModel {
 	public String toString() {
 		return "Intervention [moyens=" + vehicules + ", position=" + position + "]";
 	}
-
-	public JSONObject toJson() {
-		JSONObject json = super.toJson();
+	
+	@Override
+	public JSONObject toJSON() {
+		JSONObject json = super.toJSON();
 		try {
 
 			json.put("moyens", this.vehicules);
@@ -96,10 +97,7 @@ public class Intervention extends AbstractModel {
 		return json;
 	}
 
-	@Override
-	public IJsonable fromJson(JSONObject json) {
-		return new Intervention(json);
-	}
+
 
 	/*
 	 * GETTER & SETTER

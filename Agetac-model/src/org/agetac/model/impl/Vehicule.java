@@ -26,13 +26,13 @@ public class Vehicule extends AbstractModel {
 		this.groupesHoraires = new HashMap<EtatVehicule, String>();
 	}
 	
-	public Vehicule(JSONObject json) {
+	public Vehicule(JSONObject json) throws JSONException {
 		super(json);
 		try {
-			this.caserneName = json.getString("caserneName");
 			this.etat = EtatVehicule.valueOf(json.getString("etat"));
 			this.groupe = new Groupe(json.getJSONObject("groupe"));
-			// vu que Marie et Gildas ont rajout� groupesHoraires il faudrait compl�ter
+			this.caserneName = json.getString("caserneName");
+			// vu que Marie et Gildas ont rajoute groupesHoraires il faudrait completer
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -90,13 +90,13 @@ public class Vehicule extends AbstractModel {
 	 */
 	public JSONObject toJSON() {
 		JSONObject json = null;
-		
+		json = super.toJSON();
 		try {
-			json = super.toJson();
-			json.put("etat", this.etat.name());
-			json.put("groupe", this.groupe);
-			json.put("caserneName", this.caserneName);
 			
+			json.put("etat", this.etat.name());
+			json.put("groupe", this.groupe.toJSON());
+			json.put("caserneName", this.caserneName);
+			System.out.println(json.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -104,9 +104,4 @@ public class Vehicule extends AbstractModel {
 		return json;
 	}
 
-	@Override
-	public IJsonable fromJson(JSONObject json) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

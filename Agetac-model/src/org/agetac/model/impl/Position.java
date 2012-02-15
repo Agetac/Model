@@ -40,7 +40,7 @@ public class Position implements IJsonable {
 		this.latitude = latitude;
 	}
 
-	public JSONObject toJson() {
+	public JSONObject toJSON() {
 		JSONObject json = new JSONObject();
 		try {
 			json.put("longitude", this.longitude);
@@ -52,8 +52,4 @@ public class Position implements IJsonable {
 		return json;
 	}
 
-	@Override
-	public IJsonable fromJson(JSONObject json) {
-		return new Position(json);
-	}
 }

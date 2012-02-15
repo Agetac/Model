@@ -83,8 +83,8 @@ public class Agent extends AbstractModel {
 	/**
 	 * Convert this object to a JSON object for representation
 	 */
-	public JSONObject toJson() {
-		JSONObject json = super.toJson();
+	public JSONObject toJSON() {
+		JSONObject json = super.toJSON();
 		
 		try {
 			json.put("aptitude", aptitude.name());
@@ -96,9 +96,5 @@ public class Agent extends AbstractModel {
 		return json;
 	}
 
-	@Override
-	public IJsonable fromJson(JSONObject json) {
-		return new Agent(json);
-	}
 
 }

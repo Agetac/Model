@@ -53,17 +53,11 @@ public class Message implements IJsonable {
 		this.uniqueID = uniqueID;
 	}
 
-	/**
-	 * Cr�e un Message � partir d'un JSONObject
-	 */
-	public Message fromJson(JSONObject json) {
-		return new Message(json);
-	}
 
 	/**
-	 * Cr�e un JSONObject representant le Message
+	 * Cree un JSONObject representant le Message
 	 */
-	public JSONObject toJson() {
+	public JSONObject toJSON() {
 
 		JSONObject json = new JSONObject();
 		try {

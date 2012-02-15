@@ -59,11 +59,11 @@ public class Caserne extends AbstractModel {
 	}
 
 	@Override
-	public JSONObject toJson() {
+	public JSONObject toJSON() {
 		JSONObject json = null;
 		
 		try {
-			json = super.toJson();
+			json = super.toJSON();
 			JSONArray array = new JSONArray(vehicules);
 			json.put("moyens", array);
 			
@@ -73,9 +73,4 @@ public class Caserne extends AbstractModel {
 		return json;
 	}
 
-	@Override
-	public IJsonable fromJson(JSONObject json) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

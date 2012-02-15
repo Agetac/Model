@@ -35,7 +35,7 @@ public class Groupe extends AbstractModel {
 				membres.add(new Agent(jsar.getJSONObject(i)));
 			}
 
-			jsar = json.getJSONArray("moyen");
+			jsar = json.getJSONArray("vehicules");
 			vehicules = new ArrayList<Vehicule>();
 			for (int i = 0; i < jsar.length(); i++) {
 				vehicules.add(new Vehicule(jsar.getJSONObject(i)));
@@ -68,21 +68,18 @@ public class Groupe extends AbstractModel {
 	public void setMembres(List<Agent> membres) {
 		this.membres = membres;
 	}
-
-	public JSONObject toJson() {
-		JSONObject json = super.toJson();
+	@Override
+	public JSONObject toJSON() {
+		JSONObject json = super.toJSON();
 		try {
-			json.put("chef", chef);
+			json.put("chef", chef.toJSON());
 			json.put("membre", membres);
-			json.put("moyens", vehicules);
+			json.put("vehicules", vehicules);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		return json;
 	}
 
-	@Override
-	public IJsonable fromJson(JSONObject json) {
-		return new Groupe(json);
-	}
+
 }

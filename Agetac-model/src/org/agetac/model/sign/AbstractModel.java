@@ -11,17 +11,26 @@ public abstract class AbstractModel implements IJsonable, IModel {
 	protected Position position;
 	
 	public AbstractModel(String uid, String name, Position position) {
+		if(uid == null){
+			uid = "";
+		}
+		if(name == null){
+			name = "";
+		}
+		if(position == null){
+			position = new Position(0,0);
+		}
 		this.uniqueID = uid;
 		this.name = name;
 		this.position = position;
 	}
 	
 	public AbstractModel(JSONObject json) {
+		System.out.println(json.toString());
 		try {
 			this.uniqueID = json.getString("uniqueID");
 			this.name = json.getString("nom");
 			this.position = new Position(json.getJSONObject("position"));
-			
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -31,13 +40,13 @@ public abstract class AbstractModel implements IJsonable, IModel {
 	 * Convert this object to a JSON object for representation
 	 */
 	@Override
-	public JSONObject toJson() {
+	public JSONObject toJSON() {
 		JSONObject json = new JSONObject();
 		
 		try {
 			json.put("uniqueID", this.uniqueID);
 			json.put("nom", this.name);
-			json.put("position", this.position);
+			json.put("position", this.position.toJSON());
 			
 		} catch (Exception e) {
 			e.printStackTrace();

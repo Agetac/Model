@@ -49,8 +49,9 @@ public class Implique extends AbstractModel {
 	/**
 	 * Convert this object to a JSON object for representation
 	 */
-	public JSONObject toJson() {
-		JSONObject json = super.toJson();
+	@Override
+	public JSONObject toJSON() {
+		JSONObject json = super.toJSON();
 		try {
 			json.put("etat", etat.name());
 
@@ -60,8 +61,4 @@ public class Implique extends AbstractModel {
 		return json;
 	}
 
-	@Override
-	public IJsonable fromJson(JSONObject json) {
-		return new Implique(json);
-	}
 }

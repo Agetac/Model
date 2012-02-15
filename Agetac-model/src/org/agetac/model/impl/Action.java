@@ -21,11 +21,8 @@ public class Action extends AbstractModel {
 		return sb.toString();
 	}
 
-	public JSONObject toJson() {
-		return super.toJson();
+	public JSONObject toJSON() {
+		return super.toJSON();
 	}
 
-	public IJsonable fromJson(JSONObject json) {
-		return new Action(json);
-	}
 }

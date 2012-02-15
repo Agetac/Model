@@ -15,13 +15,9 @@ public class Cible extends AbstractModel {
 	}
 	
 	@Override
-	public JSONObject toJson() {
-		return super.toJson();
+	public JSONObject toJSON() {
+		return super.toJSON();
 	}
 
-	@Override
-	public IJsonable fromJson(JSONObject json) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }

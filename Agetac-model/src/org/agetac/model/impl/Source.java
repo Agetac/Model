@@ -2,7 +2,6 @@ package org.agetac.model.impl;
 
 import org.agetac.model.sign.AbstractModel;
 import org.agetac.model.sign.IJsonable;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Source extends AbstractModel {
@@ -16,13 +15,8 @@ public class Source extends AbstractModel {
 	}
 	
 	@Override
-	public JSONObject toJson() {
-		return super.toJson();
+	public JSONObject toJSON() {
+		return super.toJSON();
 	}
 
-	@Override
-	public IJsonable fromJson(JSONObject json) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
