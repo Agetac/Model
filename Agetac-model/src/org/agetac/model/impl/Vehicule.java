@@ -3,7 +3,6 @@ package org.agetac.model.impl;
 import java.util.HashMap;
 
 import org.agetac.model.sign.AbstractModel;
-import org.agetac.model.sign.IJsonable;
 import org.json.JSONException;
 import org.json.JSONObject;
 

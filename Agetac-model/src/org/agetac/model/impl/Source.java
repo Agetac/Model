@@ -1,7 +1,6 @@
 package org.agetac.model.impl;
 
 import org.agetac.model.sign.AbstractModel;
-import org.agetac.model.sign.IJsonable;
 import org.json.JSONObject;
 
 public class Source extends AbstractModel {

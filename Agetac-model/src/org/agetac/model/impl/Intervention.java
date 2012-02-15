@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.agetac.model.sign.AbstractModel;
-import org.agetac.model.sign.IJsonable;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
