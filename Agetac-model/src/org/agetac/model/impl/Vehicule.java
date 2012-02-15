@@ -11,13 +11,14 @@ public class Vehicule extends AbstractModel {
 	    DISPO_CASERNE, ALERTE, PARTIS, SUR_LES_LIEUX, TRANSPORT_HOPITAL, DISPO_RADIO, TEMPS_DEPASSE
 	}
 	
-	private Caserne caserne;
+	private String caserneName;
 	private EtatVehicule etat;
 	private Groupe groupe;
+	
 
-	public Vehicule(String uid, String nom, Position position, Caserne caserne, EtatVehicule etat, Groupe groupe) {
+	public Vehicule(String uid, String nom, Position position, String caserneName, EtatVehicule etat, Groupe groupe) {
 		super(uid, nom, position);
-		this.caserne = caserne;
+		this.caserneName = caserneName;
 		this.etat = etat;
 		this.groupe = groupe;
 	}
@@ -25,7 +26,7 @@ public class Vehicule extends AbstractModel {
 	public Vehicule(JSONObject json) {
 		super(json);
 		try {
-			this.caserne = new Caserne(json.getJSONObject("caserne"));
+			this.caserneName = json.getString("caserneName");
 			this.etat = EtatVehicule.valueOf(json.getString("etat"));
 			this.groupe = new Groupe(json.getJSONObject("groupe"));
 		} catch (JSONException e) {
@@ -33,12 +34,12 @@ public class Vehicule extends AbstractModel {
 		}
 	}
 	
-	public Caserne getCaserne() {
-		return caserne;
+	public String getCaserneName() {
+		return caserneName;
 	}
 	
-	public void setCaserne(Caserne caserne) {
-		this.caserne = caserne;
+	public void setCaserneName(String caserneName) {
+		this.caserneName = caserneName;
 	}
 
 	public EtatVehicule getEtat() {
@@ -67,7 +68,8 @@ public class Vehicule extends AbstractModel {
 		sb.append(this.etat);
 		sb.append(",groupe:");
 		sb.append(this.groupe);
-		sb.append(",position:");
+		sb.append(",caserneName:");
+		sb.append(this.caserneName);
 		return sb.toString();
 	}
 
@@ -81,6 +83,7 @@ public class Vehicule extends AbstractModel {
 			json = super.toJson();
 			json.put("etat", this.etat.name());
 			json.put("groupe", this.groupe);
+			json.put("caserneName", this.caserneName);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
