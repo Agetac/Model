@@ -1,6 +1,10 @@
 package org.agetac.model.impl;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 import org.agetac.model.sign.AbstractModel;
 import org.json.JSONException;
@@ -9,7 +13,41 @@ import org.json.JSONObject;
 public class Vehicule extends AbstractModel {
 
 	public enum EtatVehicule {
-	    DISPO_CASERNE, ALERTE, PARTIS, SUR_LES_LIEUX, TRANSPORT_HOPITAL, DISPO_RADIO, TEMPS_DEPASSE
+	    DISPO_CASERNE, ALERTE, PARTIS, SUR_LES_LIEUX, TRANSPORT_HOPITAL, DISPO_RADIO, TEMPS_DEPASSE, DEMOBILISE
+	}
+	
+	public enum CategorieVehicule {
+		BEA, BRS, BLS, EMB, BLSP, CAEM, CCFM, CCGC, CCGCLC, DA,
+		EPS, ESPM, FMOGP, FPT, MPR, PCM, PEVSD, SAC_PS, UTP, VPRO,
+		VRCB, VICB, VAR, VL, VLCC, VLDP, VLCGD, VLCS, VLCG, VLHR,
+		VLSV, VLOS, VLS, VNRBC, VPL, VPHV, VRAD, VSAV, VSM, VSR,
+		VTP, VTU, VCYNO
+	}
+	
+	private static final List<CategorieVehicule> VALUES_CategorieVehicule = Collections.unmodifiableList(Arrays.asList(CategorieVehicule.values()));
+	private static final int SIZE_CategorieVehicule = VALUES_CategorieVehicule.size();
+	private static final Random RANDOM_CV = new Random();
+	
+	public static CategorieVehicule randomCategorieVehicule()  {
+		return VALUES_CategorieVehicule.get(RANDOM_CV.nextInt(SIZE_CategorieVehicule));
+	}
+	
+	private static final List<EtatVehicule> VALUES_EtatVehicule = Collections.unmodifiableList(Arrays.asList(EtatVehicule.values()));
+	private static final int SIZE_EtatVehicule = VALUES_EtatVehicule.size();
+	private static final Random RANDOM_EV = new Random();
+	
+	public static EtatVehicule randomEtatVehicule()  {
+		return VALUES_EtatVehicule.get(RANDOM_EV.nextInt(SIZE_EtatVehicule));
+	}
+	
+	private static final Random RANDOM_GH = new Random();
+	public static String randomGH(){
+		int un, deux, trois, quatre;
+		un = RANDOM_GH.nextInt(2);
+		if(un < 2) deux = RANDOM_GH.nextInt(9); else deux = RANDOM_GH.nextInt(3);
+		trois = RANDOM_GH.nextInt(5);
+		quatre = RANDOM_GH.nextInt(9);
+		return ""+un+deux+trois+quatre;
 	}
 	
 	private String caserneName;
@@ -23,6 +61,14 @@ public class Vehicule extends AbstractModel {
 		this.etat = etat;
 		this.groupeID = groupe.getUniqueID();
 		this.groupesHoraires = new HashMap<EtatVehicule, String>();
+		this.groupesHoraires.put(EtatVehicule.DISPO_CASERNE, "");
+		this.groupesHoraires.put(EtatVehicule.ALERTE, randomGH());
+		this.groupesHoraires.put(EtatVehicule.PARTIS, randomGH());
+		this.groupesHoraires.put(EtatVehicule.SUR_LES_LIEUX, randomGH());
+		this.groupesHoraires.put(EtatVehicule.TRANSPORT_HOPITAL, "");
+		this.groupesHoraires.put(EtatVehicule.DISPO_RADIO, "");
+		this.groupesHoraires.put(EtatVehicule.TEMPS_DEPASSE, "");
+		this.groupesHoraires.put(EtatVehicule.DEMOBILISE, randomGH());
 	}
 	
 	public Vehicule(String uid, String nom, Position position, String caserneName, EtatVehicule etat, String groupeID) {
