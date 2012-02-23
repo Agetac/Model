@@ -24,9 +24,7 @@ public class InterventionTest {
 
 	@Test
 	public void jsonTransformNoException() throws Exception {
-		Vehicule v1 = new Vehicule("v1","fpt", new Position(12.155466,42.5555), "Janzé", Vehicule.EtatVehicule.ALERTE, new Groupe("g", null, null));
-		Vehicule v2 = null;
-	
+
 		Intervention inter1 = new Intervention("inter");
 		
 		Position position = new Position(42.16545,42.65464);
@@ -74,8 +72,6 @@ public class InterventionTest {
 	
 	@Test
 	public void jsonTransformEquality() throws InvalidJSONException, JSONException {
-		Vehicule v1 = new Vehicule("v1","fpt", new Position(12.155466,42.5555), "Janzé", Vehicule.EtatVehicule.ALERTE, new Groupe("g", null, null));
-		Vehicule v2 = null;
 	
 		Intervention inter1 = new Intervention("inter");
 		
