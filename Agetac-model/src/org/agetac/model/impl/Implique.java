@@ -1,5 +1,6 @@
 package org.agetac.model.impl;
 
+import org.agetac.model.exception.InvalidJSONException;
 import org.agetac.model.sign.AbstractModel;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,13 +18,13 @@ public class Implique extends AbstractModel {
 		this.etat = etat;
 	}
 
-	public Implique(JSONObject json) {
+	public Implique(JSONObject json) throws InvalidJSONException {
 		super(json);
 		
 		try {
 			this.etat = EtatImplique.valueOf(json.getString("etat"));
 		} catch (JSONException e) {
-			e.printStackTrace();
+			throw new InvalidJSONException(json.toString());
 		}
 	}
 
@@ -39,24 +40,23 @@ public class Implique extends AbstractModel {
 	 * Convert this object to a string for representation
 	 */
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append("etat:");
-		sb.append(this.etat);
-		return sb.toString();
+		try {
+			return this.toJSON().toString();
+		} catch (JSONException e) {
+			return "Error";
+		}
 	}
 
 	/**
 	 * Convert this object to a JSON object for representation
+	 * @throws JSONException 
 	 */
 	@Override
-	public JSONObject toJSON() {
+	public JSONObject toJSON() throws JSONException {
 		JSONObject json = super.toJSON();
-		try {
-			json.put("etat", etat.name());
+		
+		json.put("etat", etat.name());
 
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
 		return json;
 	}
 

@@ -2,7 +2,9 @@ package org.agetac.model.test;
 
 import static org.junit.Assert.*;
 
+import org.agetac.model.exception.InvalidJSONException;
 import org.agetac.model.impl.Implique;
+import org.json.JSONException;
 import org.junit.Test;
 
 public class ImpliqueTest {
@@ -18,7 +20,7 @@ public class ImpliqueTest {
 	}
 	
 	@Test
-	public void jsonTransformEquality() {
+	public void jsonTransformEquality() throws InvalidJSONException, JSONException {
 		Implique i1 = new Implique("i1", Implique.EtatImplique.URGENCE_ABSOLUE);
 		Implique i2;
 	

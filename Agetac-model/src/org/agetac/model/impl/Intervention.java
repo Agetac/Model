@@ -3,6 +3,7 @@ package org.agetac.model.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.agetac.model.exception.InvalidJSONException;
 import org.agetac.model.sign.AbstractModel;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +29,7 @@ public class Intervention extends AbstractModel {
 		this.impliques = new ArrayList<Implique>();
 	}
 
-	public Intervention(JSONObject json) {
+	public Intervention(JSONObject json) throws InvalidJSONException {
 		super(json);
 		
 		this.vehicules = new ArrayList<Vehicule>();
@@ -39,7 +40,7 @@ public class Intervention extends AbstractModel {
 		this.impliques = new ArrayList<Implique>();
 
 		try {
-			JSONArray jsar = json.getJSONArray("moyens");
+			JSONArray jsar = json.getJSONArray("vehicules");
 			for (int i = 0; i < jsar.length(); i++) {
 				vehicules.add(new Vehicule(jsar.getJSONObject(i)));
 			}
@@ -69,29 +70,69 @@ public class Intervention extends AbstractModel {
 				impliques.add(new Implique(jsar.getJSONObject(i)));
 			}
 		} catch (JSONException e) {
-			e.printStackTrace();
+			throw new InvalidJSONException(json.toString());
 		}
 	}
 
 	public String toString() {
-		return "Intervention [moyens=" + vehicules + ", position=" + position + "]";
+		try {
+			return this.toJSON().toString();
+		} catch (JSONException e) {
+			return "Error";
+		}
 	}
 	
 	@Override
-	public JSONObject toJSON() {
+	public JSONObject toJSON() throws JSONException {
 		JSONObject json = super.toJSON();
-		try {
 
-			json.put("moyens", this.vehicules);
-			json.put("cibles", this.cibles);
-			json.put("sources", this.sources);
-			json.put("actions", this.actions);
-			json.put("messages", this.messages);
-			json.put("impliques", this.impliques);
-
-		} catch (JSONException e) {
-			e.printStackTrace();
+		JSONArray array_vehicules = new JSONArray();
+		if(this.vehicules != null){
+			for(int i = 0; i < this.vehicules.size(); i++){
+				array_vehicules.put(i, this.vehicules.get(i).toJSON());
+			}
 		}
+		json.put("vehicules", array_vehicules);
+		
+		JSONArray array_cibles = new JSONArray();
+		if(this.cibles != null){
+			for(int i = 0; i < this.cibles.size(); i++){
+				array_cibles.put(i, this.cibles.get(i).toJSON());
+			}
+		}
+		json.put("cibles", array_cibles);
+		
+		JSONArray array_sources = new JSONArray();
+		if(this.sources != null){
+			for(int i = 0; i < this.sources.size(); i++){
+				array_sources.put(i, this.sources.get(i).toJSON());
+			}
+		}
+		json.put("sources", array_sources);
+		
+		JSONArray array_actions = new JSONArray();
+		if(this.actions != null){
+			for(int i = 0; i < this.actions.size(); i++){
+				array_actions.put(i, this.actions.get(i).toJSON());
+			}
+		}
+		json.put("actions", array_actions);
+		
+		JSONArray array_messages = new JSONArray();
+		if(this.messages != null){
+			for(int i = 0; i < this.messages.size(); i++){
+				array_messages.put(i, this.messages.get(i).toJSON());
+			}
+		}
+		json.put("messages", array_messages);
+		
+		JSONArray array_impliques = new JSONArray();
+		if(this.impliques != null){
+			for(int i = 0; i < this.impliques.size(); i++){
+				array_impliques.put(i, this.impliques.get(i).toJSON());
+			}
+		}
+		json.put("impliques", array_impliques);
 
 		return json;
 	}

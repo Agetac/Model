@@ -3,6 +3,7 @@ package org.agetac.model.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.agetac.model.exception.InvalidJSONException;
 import org.agetac.model.sign.AbstractModel;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,16 +18,17 @@ public class Caserne extends AbstractModel {
 		this.vehicules = vehicules;
 	}
 
-	public Caserne(JSONObject json) {
+	public Caserne(JSONObject json) throws InvalidJSONException {
 		super(json);
-		try {
+		
+		try{
 			JSONArray jsar = json.getJSONArray("moyens");
 			for (int i = 0; i < jsar.length(); i++) {
 				vehicules.add(new Vehicule(jsar.getJSONObject(i)));
 			}
-
-		} catch (JSONException e) {
-			e.printStackTrace();
+		}
+		catch(JSONException e){
+			throw new InvalidJSONException(json.toString());
 		}
 	}
 
@@ -47,28 +49,26 @@ public class Caserne extends AbstractModel {
 		} else return null;
 	}
 
-	@Override
+	/**
+	 * Convert this object to a string for representation
+	 */
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append("nom:");
-		sb.append(this.name);
-		sb.append(", moyens:");
-		sb.append(this.vehicules);
-		return sb.toString();
+		
+		try {
+			return this.toJSON().toString();
+		} catch (JSONException e) {
+			return "Error";
+		}
 	}
 
 	@Override
-	public JSONObject toJSON() {
+	public JSONObject toJSON() throws JSONException {
 		JSONObject json = null;
 		
-		try {
-			json = super.toJSON();
-			JSONArray array = new JSONArray(vehicules);
-			json.put("moyens", array);
-			
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		json = super.toJSON();
+		JSONArray array = new JSONArray(vehicules);
+		json.put("moyens", array);
+		
 		return json;
 	}
 

@@ -2,8 +2,10 @@ package org.agetac.model.test;
 
 import static org.junit.Assert.*;
 
+import org.agetac.model.exception.InvalidJSONException;
 import org.agetac.model.impl.Position;
 import org.agetac.model.impl.Source;
+import org.json.JSONException;
 import org.junit.Test;
 
 public class SourceTest {
@@ -19,7 +21,7 @@ public class SourceTest {
 	}
 	
 	@Test
-	public void jsonTransformEquality() {
+	public void jsonTransformEquality() throws InvalidJSONException, JSONException {
 		Source s1 = new Source("s1", new Position(40.123,41.456));
 		Source s2;
 	

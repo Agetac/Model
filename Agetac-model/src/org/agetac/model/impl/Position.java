@@ -1,5 +1,6 @@
 package org.agetac.model.impl;
 
+import org.agetac.model.exception.InvalidJSONException;
 import org.agetac.model.sign.IJsonable;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,13 +15,12 @@ public class Position implements IJsonable {
 		this.latitude = latitude;
 	}
 	
-	public Position(JSONObject json){
+	public Position(JSONObject json) throws InvalidJSONException{
 		try {
 			this.longitude = json.getDouble("longitude");
 			this.latitude = json.getDouble("latitude");
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new InvalidJSONException(json.toString());
 		}
 	}
 
@@ -40,16 +40,24 @@ public class Position implements IJsonable {
 		this.latitude = latitude;
 	}
 
-	public JSONObject toJSON() {
+	@Override
+	public JSONObject toJSON() throws JSONException {
 		JSONObject json = new JSONObject();
-		try {
-			json.put("longitude", this.longitude);
-			json.put("latitude", this.latitude);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		json.put("longitude", this.longitude);
+		json.put("latitude", this.latitude);
+		
 		return json;
+	}
+	
+	/**
+	 * Convert this object to a string for representation
+	 */
+	public String toString() {
+		try {
+			return this.toJSON().toString();
+		} catch (JSONException e) {
+			return "Error";
+		}
 	}
 
 }

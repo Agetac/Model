@@ -3,6 +3,7 @@ package org.agetac.model.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.agetac.model.exception.InvalidJSONException;
 import org.agetac.model.sign.AbstractModel;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,22 +34,46 @@ public class Agent extends AbstractModel {
 		this.subordonnes = subordonnes;
 	}
 
-	public Agent(JSONObject json) {
+	public Agent(JSONObject json) throws InvalidJSONException {
 		super(json);
 		
-		try {
+		try{
 			this.aptitude = Aptitude.valueOf(json.getString("aptitude"));
 			JSONArray array = json.getJSONArray("subordonnes");
+			
 			this.subordonnes = new ArrayList<Agent>();
 			for (int i=0; i<array.length(); i++) {
 				this.subordonnes.add(new Agent(array.getJSONObject(i)));
 			}
-
-		} catch (JSONException e) {
-			e.printStackTrace();
+		}catch (JSONException e){
+			throw new InvalidJSONException(json.toString());
 		}
-	}
 
+	}
+	
+
+	/**
+	 * Convert this object to a JSON object for representation
+	 * @throws JSONException 
+	 */
+	public JSONObject toJSON() throws JSONException {
+		
+		JSONObject json = super.toJSON();
+		
+		json.put("aptitude", aptitude.name());
+		JSONArray array = new JSONArray();
+		
+		if(this.subordonnes != null){
+			for(int i = 0; i < this.subordonnes.size(); i++){
+				array.put(i, this.subordonnes.get(i).toJSON());
+			}
+		}
+		
+		json.put("subordonnes", array);
+
+		return json;
+	}
+	
 	public Aptitude getAptitude() {
 		return aptitude;
 	}
@@ -69,30 +94,11 @@ public class Agent extends AbstractModel {
 	 * Convert this object to a string for representation
 	 */
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append("[Agent ");
-		sb.append(",aptitude:");
-		sb.append(this.aptitude);
-		sb.append(",subordonnes:");
-		sb.append(this.subordonnes);
-		sb.append("]");
-		return sb.toString();
-	}
-
-	/**
-	 * Convert this object to a JSON object for representation
-	 */
-	public JSONObject toJSON() {
-		JSONObject json = super.toJSON();
-		
 		try {
-			json.put("aptitude", aptitude.name());
-			json.put("subordonnes", this.subordonnes);
-
+			return this.toJSON().toString();
 		} catch (JSONException e) {
-			e.printStackTrace();
+			return "Error";
 		}
-		return json;
 	}
 
 

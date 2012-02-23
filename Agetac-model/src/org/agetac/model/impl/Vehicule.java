@@ -2,6 +2,7 @@ package org.agetac.model.impl;
 
 import java.util.HashMap;
 
+import org.agetac.model.exception.InvalidJSONException;
 import org.agetac.model.sign.AbstractModel;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,14 +34,30 @@ public class Vehicule extends AbstractModel {
 		this.groupesHoraires = new HashMap<EtatVehicule, String>();
 	}
 	
-	public Vehicule(JSONObject json) throws JSONException {
+	public Vehicule(JSONObject json) throws InvalidJSONException {
 		super(json);
+		try{
+			this.etat = EtatVehicule.valueOf(json.getString("etat"));
+			this.groupeID = json.getString("groupeID");
+			this.caserneName = json.getString("caserneName");
+			//TODO: Compléter avec la liste des groupe horaire
+		}catch(JSONException e){
+			throw new InvalidJSONException(json.toString());
+		}
+	}
 	
-		this.etat = EtatVehicule.valueOf(json.getString("etat"));
-		this.groupeID = json.getString("groupeID");
-		this.caserneName = json.getString("caserneName");
-		// vu que Marie et Gildas ont rajoute groupesHoraires il faudrait completer
+	/**
+	 * Convert this object to a JSON object for representation
+	 * @throws JSONException 
+	 */
+	public JSONObject toJSON() throws JSONException {
+		JSONObject json = super.toJSON();
 
+		json.put("etat", this.etat.name());
+		json.put("groupeID", this.groupeID);
+		json.put("caserneName", this.caserneName);
+		//TODO: Compléter avec la liste des groupe horaire
+		return json;
 	}
 	
 	public String getCaserneName() {
@@ -81,34 +98,13 @@ public class Vehicule extends AbstractModel {
 	 * Convert this object to a string for representation
 	 */
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append(super.toString());
-		sb.append("etat:");
-		sb.append(this.etat);
-		sb.append(",groupe:");
-		sb.append(this.groupeID);
-		sb.append(",caserneName:");
-		sb.append(this.caserneName);
-		return sb.toString();
+		try {
+			return this.toJSON().toString();
+		} catch (JSONException e) {
+			return "Error";
+		}
 	}
 
-	/**
-	 * Convert this object to a JSON object for representation
-	 */
-	public JSONObject toJSON() {
-		JSONObject json = null;
-		json = super.toJSON();
-		try {
-			
-			json.put("etat", this.etat.name());
-			json.put("groupe", this.groupeID);
-			json.put("caserneName", this.caserneName);
-			System.out.println(json.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return json;
-	}
+
 
 }

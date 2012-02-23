@@ -56,25 +56,26 @@ public class Message implements IJsonable {
 
 	/**
 	 * Cree un JSONObject representant le Message
+	 * @throws JSONException 
 	 */
-	public JSONObject toJSON() {
+	public JSONObject toJSON() throws JSONException {
 
 		JSONObject json = new JSONObject();
-		try {
-			json.put("uniqueID", this.uniqueID);
-			json.put("message", this.message);
-			json.put("date", this.date);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+
+		json.put("uniqueID", this.uniqueID);
+		json.put("message", this.message);
+		json.put("date", this.date);
+
 
 		return json;
 	}
 
-	@Override
 	public String toString() {
-		return "Message [uniqueID=" + uniqueID + ", message=" + message
-				+ ", date=" + date + "]";
+		try {
+			return this.toJSON().toString();
+		} catch (JSONException e) {
+			return "Error";
+		}
 	}
 
 }

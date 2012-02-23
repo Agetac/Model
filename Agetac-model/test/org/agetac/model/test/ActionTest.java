@@ -2,8 +2,10 @@ package org.agetac.model.test;
 
 import static org.junit.Assert.*;
 
+import org.agetac.model.exception.InvalidJSONException;
 import org.agetac.model.impl.Action;
 import org.agetac.model.impl.Position;
+import org.json.JSONException;
 import org.junit.Test;
 
 public class ActionTest {
@@ -18,7 +20,7 @@ public class ActionTest {
 	}
 	
 	@Test
-	public void jsonTransformEquality() {
+	public void jsonTransformEquality() throws InvalidJSONException, JSONException {
 		Action a1 = new Action("a1", new Position(40.123,41.456));
 		Action a2;
 	

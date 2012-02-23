@@ -1,6 +1,8 @@
 package org.agetac.model.impl;
 
+import org.agetac.model.exception.InvalidJSONException;
 import org.agetac.model.sign.AbstractModel;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Action extends AbstractModel {
@@ -9,18 +11,19 @@ public class Action extends AbstractModel {
 		super(uid, null, position);
 	}
 
-	public Action(JSONObject json) {
+	public Action(JSONObject json) throws InvalidJSONException {
 		super(json);
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
-		sb.append("position:");
-		sb.append(this.position);
-		return sb.toString();
+		try {
+			return this.toJSON().toString();
+		} catch (JSONException e) {
+			return "Error";
+		}
 	}
 
-	public JSONObject toJSON() {
+	public JSONObject toJSON() throws JSONException {
 		return super.toJSON();
 	}
 
