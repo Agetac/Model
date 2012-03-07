@@ -1,29 +1,37 @@
 package org.agetac.model.sign;
 
+import javax.jdo.annotations.PersistenceCapable;
+
 import org.agetac.model.exception.InvalidJSONException;
 import org.agetac.model.impl.Position;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+@PersistenceCapable
 public abstract class AbstractModel implements IJsonable, IModel {
 
 	protected String uniqueID;
 	protected String name;
 	protected Position position;
 
-	public AbstractModel(String uid, String name, Position position) {
-		if (uid == null) {
-			uid = "";
-		}
+	public AbstractModel(String name, Position position){
 		if (name == null) {
 			name = "";
 		}
 		if (position == null) {
 			position = new Position(0, 0);
 		}
-		this.uniqueID = uid;
+		
 		this.name = name;
 		this.position = position;
+	}
+	
+	public AbstractModel(String uid, String name, Position position) {
+		this(name, position);
+		if (uid == null) {
+			uid = "";
+		}
+		this.uniqueID = uid;
 	}
 
 	public AbstractModel(JSONObject json) throws InvalidJSONException {
