@@ -1,5 +1,6 @@
 package org.agetac.model.impl;
 
+import java.sql.Time;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import org.agetac.model.exception.InvalidJSONException;
 import org.agetac.model.sign.AbstractModel;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 public class Vehicule extends AbstractModel {
 
@@ -71,6 +73,24 @@ public class Vehicule extends AbstractModel {
 		this.groupesHoraires.put(EtatVehicule.TEMPS_DEPASSE, "");
 		this.groupesHoraires.put(EtatVehicule.DEMOBILISE, randomGH());
 	}
+	
+	public Vehicule(String uid, String nom, Position position, String caserneName, EtatVehicule etat, Groupe groupe, String heure) {
+		super(uid, nom, position);
+		this.caserneName = caserneName;
+		this.etat = etat;
+		this.groupeID = groupe.getUniqueID();
+		this.groupesHoraires = new HashMap<EtatVehicule, String>();
+		this.groupesHoraires.put(EtatVehicule.DISPO_CASERNE, heure);
+		this.groupesHoraires.put(EtatVehicule.ALERTE, heure);
+		this.groupesHoraires.put(EtatVehicule.PARTIS, heure);
+		this.groupesHoraires.put(EtatVehicule.SUR_LES_LIEUX, "");
+		this.groupesHoraires.put(EtatVehicule.TRANSPORT_HOPITAL, "");
+		this.groupesHoraires.put(EtatVehicule.DISPO_RADIO, "");
+		this.groupesHoraires.put(EtatVehicule.TEMPS_DEPASSE, "");
+		this.groupesHoraires.put(EtatVehicule.DEMOBILISE, "");
+	}
+	
+
 	
 	public Vehicule(String uid, String nom, Position position, String caserneName, EtatVehicule etat, String groupeID) {
 		super(uid, nom, position);
