@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.agetac.model.exception.InvalidJSONException;
 import org.agetac.model.impl.Action;
+import org.agetac.model.impl.Action.ActionType;
 import org.agetac.model.impl.Position;
 import org.json.JSONException;
 import org.junit.Test;
@@ -12,7 +13,7 @@ public class ActionTest {
 
 	@Test
 	public void jsonTransformNoException() throws Exception {
-		Action a1 = new Action("a1", new Position(40.123,41.456));
+		Action a1 = new Action("a1", new Position(40.123,41.456), ActionType.FIRE, new Position(40.123,41.456), new Position(40.123,41.456));
 		Action a2;
 	
 		a2 = new Action(a1.toJSON());
@@ -21,7 +22,7 @@ public class ActionTest {
 	
 	@Test
 	public void jsonTransformEquality() throws InvalidJSONException, JSONException {
-		Action a1 = new Action("a1", new Position(40.123,41.456));
+		Action a1 = new Action("a1", new Position(40.123,41.456), ActionType.FIRE, new Position(40.123,41.456), new Position(40.123,41.456));
 		Action a2;
 	
 		a2 = new Action(a1.toJSON());

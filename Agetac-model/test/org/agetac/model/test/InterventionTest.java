@@ -15,6 +15,7 @@ import org.agetac.model.impl.Message;
 import org.agetac.model.impl.Position;
 import org.agetac.model.impl.Source;
 import org.agetac.model.impl.Vehicule;
+import org.agetac.model.impl.Action.ActionType;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
@@ -32,8 +33,8 @@ public class InterventionTest {
 		
 		
 		List<Action> actions = new ArrayList<Action>();
-		actions.add(new Action("act1", new Position(41.5454,42.5413)));
-		actions.add(new Action("act2", new Position(41.5454,42.5413)));
+		actions.add(new Action("act1", new Position(41.5454,42.5413), ActionType.FIRE, new Position(40.123,41.456), new Position(40.123,41.456)));
+		actions.add(new Action("act2", new Position(41.5454,42.5413), ActionType.FIRE, new Position(40.123,41.456), new Position(40.123,41.456)));
 		inter1.setActions(actions);
 		
 		List<Cible> cibles = new ArrayList<Cible>();
@@ -80,8 +81,8 @@ public class InterventionTest {
 		
 		
 		List<Action> actions = new ArrayList<Action>();
-		actions.add(new Action("act1", new Position(41.5454,42.5413)));
-		actions.add(new Action("act2", new Position(41.5454,42.5413)));
+		actions.add(new Action("act1", new Position(41.5454,42.5413), ActionType.FIRE, new Position(40.123,41.456), new Position(40.123,41.456)));
+		actions.add(new Action("act2", new Position(41.5454,42.5413), ActionType.FIRE, new Position(40.123,41.456), new Position(40.123,41.456)));
 		inter1.setActions(actions);
 		
 		List<Cible> cibles = new ArrayList<Cible>();

@@ -1,18 +1,36 @@
 package org.agetac.model.impl;
 
 import org.agetac.model.exception.InvalidJSONException;
+import org.agetac.model.impl.Agent.Aptitude;
 import org.agetac.model.sign.AbstractModel;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Action extends AbstractModel {
 
-	public Action(String uid, Position position) {
+	public enum ActionType {
+		FIRE,
+		WATER,
+		VICTIM
+	}
+	
+	private ActionType actionType;
+	private Position origin, aim;
+	
+	public Action(String uid, Position position, ActionType actionType, Position origin, Position aim) {
 		super(uid, null, position);
+		this.actionType = actionType;
+		this.origin = origin;
+		this.aim = aim;
 	}
 
-	public Action(JSONObject json) throws InvalidJSONException {
+	public Action(JSONObject json) throws InvalidJSONException, JSONException {
 		super(json);
+		this.actionType = ActionType.valueOf(json.getString("actionType"));
+		this.origin = new Position(json.getJSONObject("origin"));
+		this.aim = new Position(json.getJSONObject("aim"));
+		
 	}
 
 	public String toString() {
@@ -24,7 +42,13 @@ public class Action extends AbstractModel {
 	}
 
 	public JSONObject toJSON() throws JSONException {
-		return super.toJSON();
-	}
+		JSONObject json = super.toJSON();
+		
+		json.put("actionType", actionType.name());
+		
+		json.put("origin", origin.toJSON());
+		json.put("aim", aim.toJSON());
+
+		return json;	}
 
 }
