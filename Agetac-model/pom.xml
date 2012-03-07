@@ -19,6 +19,33 @@
 	  <target>1.6</target>
 	</configuration>
       </plugin>
+      <plugin>
+	<groupId>org.datanucleus</groupId>
+	<artifactId>maven-datanucleus-plugin</artifactId>
+	<version>3.0.1</version>
+	<dependencies>
+	  <!-- default dependency doesn't work. override. -->
+	  <dependency>
+	    <groupId>javax.jdo</groupId>
+	    <artifactId>jdo-api</artifactId>
+	    <version>3.0.1</version>
+	    <scope>runtime</scope>
+	  </dependency>
+	</dependencies>
+	<configuration>
+	  <!-- NOTE If something doesn't work, check http://www.datanucleus.org/products/datanucleus/enhancer.htm. There are many options. -->
+	  <verbose>true</verbose>
+	  <!-- <mappingIncludes>**/*.class</mappingIncludes> -->
+	</configuration>
+	<executions>
+	  <execution>
+	    <phase>process-classes</phase>
+	    <goals>
+	      <goal>enhance</goal>
+	    </goals>	    
+	  </execution>
+	</executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -35,5 +62,40 @@
       <version>4.10</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>javax.jdo</groupId>
+      <artifactId>jdo-api</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.datanucleus</groupId>
+      <artifactId>datanucleus-api-jdo</artifactId>
+      <version>3.0.2</version>
+    </dependency>
+
   </dependencies>
+
+  <repositories>
+    <repository>
+      <id>DataNucleus_Repos2</id>
+      <name>DataNucleus Repository</name>
+      <url>http://www.datanucleus.org/downloads/maven2</url>
+    </repository>
+    <!-- Required for transaction-api transitive dep-->
+    <!-- NOTE not sure if this repo is really necessary. -->
+    <repository> 
+      <id>Java_Net_LEGACY</id>
+      <name>Java.Net legacy</name>
+      <url>http://downloads.java.net/maven/1/</url>
+    </repository>
+  </repositories>
+  
+  <pluginRepositories>
+    <pluginRepository>
+      <id>DataNucleus_2</id>
+      <url>http://www.datanucleus.org/downloads/maven2</url>
+    </pluginRepository>
+  </pluginRepositories>
 </project>
