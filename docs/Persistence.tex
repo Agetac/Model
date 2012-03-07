@@ -1,0 +1,25 @@
+\title{The Agetac Build System}
+\author{George Politis}
+
+\documentclass[12pt]{article}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+1. Why do we need an abstraction layer? Talk about how wonderful it is to write SQL or how portable your code is..
+2. Present various ways to provide abstraction
+3. Show which abstraction layer is the best (performance comparisons).
+
+No abstraction at all (...), Hibernate, JDO, JPA. Provide performance comparisons between Hibernate and JDO. 
+
+\section{JDO}
+
+Java Data Objects (JDO) is a standard interface for storing objects containing data into a database. The standard defines interfaces for annotating Java objects, retrieving objects with queries, and interacting with a database using transactions. An application that uses the JDO interface can work with different kinds of databases without using any database-specific code, including relational databases, hierarchical databases, and object databases. As with other interface standards, JDO simplifies porting your application between different storage solutions.
+
+JDO uses a post-compilation \emph{enhancement} step in the build process to associate data classes with the JDO implementation. TODO Reference the build system to show how we bytecode enhance our classes.
+
+\section{Conclusions}
+
+\end{document}
