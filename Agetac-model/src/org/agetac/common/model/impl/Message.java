@@ -11,14 +11,17 @@ public class Message implements IJsonable {
 	private String date;
 
 	public Message(String uniqueID, String message, String date) {
-
-		this.uniqueID = uniqueID;
+		if(uniqueID == null){
+			this.uniqueID = "";
+		}else{
+			this.uniqueID = uniqueID;
+		}
 		this.message = message;
 		this.date = date;
 	}
 
 	public Message(JSONObject json) {
-
+		
 		try {
 			this.setUniqueID(json.getString("uniqueID"));
 			this.message = json.getString("message");
