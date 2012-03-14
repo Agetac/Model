@@ -15,7 +15,7 @@ public class VehiculeTest {
 
 	@Test
 	public void jsonTransformNoException() throws Exception {
-		Vehicule v1 = new Vehicule("v1","Janze", new Position(12.155466,42.5555), CategorieVehicule.FPT, "Janzé", Vehicule.EtatVehicule.ALERTE, new Groupe("g", null, null), "4242");
+		Vehicule v1 = new Vehicule("v1", new Position(12.155466,42.5555), CategorieVehicule.FPT, "Janzé", Vehicule.EtatVehicule.ALERTE, new Groupe("g", null, null), "4242");
 		Vehicule v2 = null;
 	
 		JSONObject jv1 = v1.toJSON();
@@ -26,7 +26,7 @@ public class VehiculeTest {
 	
 	@Test
 	public void jsonTransformEquality() throws InvalidJSONException, JSONException {
-		Vehicule v1 = new Vehicule("v1","Janze", new Position(12.155466,42.5555), CategorieVehicule.FPT, "Janzé", Vehicule.EtatVehicule.ALERTE, new Groupe("g", null, null), "1664");
+		Vehicule v1 = new Vehicule("v1", new Position(12.155466,42.5555), CategorieVehicule.FPT, "Janzé", Vehicule.EtatVehicule.ALERTE, new Groupe("g", null, null), "1664");
 		Vehicule v2 = null;
 	
 		
