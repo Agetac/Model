@@ -38,8 +38,8 @@ public class Vehicule extends AbstractModel {
 	private HashMap<EtatVehicule, String> groupesHoraires; 
 	private CategorieVehicule categorie;
 	
-	public Vehicule(String uid, String nom, Position position, CategorieVehicule cat, String caserneName, EtatVehicule etat, Groupe groupe, String heure) {
-		super(uid, nom, position);
+	public Vehicule(String uid, Position position, CategorieVehicule cat, String caserneName, EtatVehicule etat, Groupe groupe, String heure) {
+		super(uid, cat.name()+" "+caserneName, position);
 		this.categorie = cat;
 		this.caserneName = caserneName;
 		this.etat = etat;

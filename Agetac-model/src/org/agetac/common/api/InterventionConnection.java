@@ -156,6 +156,7 @@ public class InterventionConnection implements InterventionApi {
 	public Vehicule putVehicule(Vehicule v) throws BadResponseException, JSONException {
 		
 		Representation r = new JsonRepresentation(v.toJSON());
+
 		r = serv.putResource("intervention/" + interId + "/vehicule", null, r);
 		
 		try {
