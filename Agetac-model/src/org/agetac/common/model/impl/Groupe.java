@@ -74,7 +74,7 @@ public class Groupe extends AbstractModel {
 	
 	@Override
 	public Position getPosition(){
-		if(vehicules.get(0) != null){
+		if(!vehicules.isEmpty() && vehicules.get(0) != null){
 			return vehicules.get(0).getPosition();
 		}
 		else return super.getPosition();
