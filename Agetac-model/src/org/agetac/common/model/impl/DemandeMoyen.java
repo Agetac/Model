@@ -28,8 +28,8 @@ public class DemandeMoyen extends AbstractModel {
 	private HashMap<EtatDemande, String> groupesHoraires; 
 	private CategorieVehicule categorie;
 	
-	public DemandeMoyen(String uid, String nom, Position position, CategorieVehicule cat, EtatDemande etat, Groupe groupe, String heure) {
-		super(uid, nom, position);
+	public DemandeMoyen(String uid, Position position, CategorieVehicule cat, EtatDemande etat, Groupe groupe, String heure) {
+		super(uid, cat.name()+"-demande", position);
 		this.categorie = cat;
 		this.etat = etat;
 		this.groupeID = groupe.getUniqueID();
