@@ -2,10 +2,10 @@ package org.agetac.model.test;
 
 import static org.junit.Assert.*;
 
-import org.agetac.model.exception.InvalidJSONException;
-import org.agetac.model.impl.Groupe;
-import org.agetac.model.impl.Position;
-import org.agetac.model.impl.Vehicule;
+import org.agetac.common.exception.InvalidJSONException;
+import org.agetac.common.model.impl.Groupe;
+import org.agetac.common.model.impl.Position;
+import org.agetac.common.model.impl.Vehicule;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;

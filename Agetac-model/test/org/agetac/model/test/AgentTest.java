@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.agetac.model.exception.InvalidJSONException;
-import org.agetac.model.impl.Agent;
+import org.agetac.common.exception.InvalidJSONException;
+import org.agetac.common.model.impl.Agent;
 import org.json.JSONException;
 import org.junit.Test;
 
