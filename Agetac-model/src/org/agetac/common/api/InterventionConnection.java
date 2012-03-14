@@ -17,12 +17,12 @@ import org.json.JSONException;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 
-public class InterventionConnection implements InterventionApi{
+public class InterventionConnection implements InterventionApi {
 
 	private String interId;
-	private ServerConnection serv;
+	private ServerApi serv;
 
-	public InterventionConnection(String interId, ServerConnection serv) {
+	public InterventionConnection(String interId, ServerApi serv) {
 
 		this.interId = interId;
 		this.serv = serv;
@@ -45,7 +45,6 @@ public class InterventionConnection implements InterventionApi{
 			e.printStackTrace();
 		}
 
-
 		return m;
 	}
 
@@ -54,14 +53,14 @@ public class InterventionConnection implements InterventionApi{
 		List<Message> messages = new ArrayList<Message>();
 		JsonRepresentation representation = null;
 
-		// Récupération de la liste des messages
+		// Rï¿½cupï¿½ration de la liste des messages
 		Representation repr = serv.getResource("intervention/" + interId
 				+ "/message", null);
 
 		try {
 			representation = new JsonRepresentation(repr);
 
-			JSONArray ar = representation.getJsonArray(); // Récupération de la
+			JSONArray ar = representation.getJsonArray(); // Rï¿½cupï¿½ration de la
 															// liste des
 															// messages
 
@@ -132,14 +131,14 @@ public class InterventionConnection implements InterventionApi{
 		List<Vehicule> vehicules = new ArrayList<Vehicule>();
 		JsonRepresentation representation = null;
 
-		// Récupération de la liste des Vehicules
+		// Rï¿½cupï¿½ration de la liste des Vehicules
 		Representation repr = serv.getResource("intervention/" + interId
 				+ "/vehicule", null);
 
 		try {
 			representation = new JsonRepresentation(repr);
 
-			JSONArray ar = representation.getJsonArray(); // Récupération de la
+			JSONArray ar = representation.getJsonArray(); // Rï¿½cupï¿½ration de la
 															// liste des
 															// vehicules
 
@@ -154,18 +153,9 @@ public class InterventionConnection implements InterventionApi{
 		return vehicules;
 	}
 
-	public void putVehicule(Vehicule v) throws BadResponseException {
-
-		Representation r;
-		try {
-			r = new JsonRepresentation(v.toJSON());
-			serv.putResource("intervention/" + interId + "/vehicule", v.getUniqueID(), r);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		
-
+	public void putVehicule(Vehicule v) throws BadResponseException, JSONException {
+		Representation r = new JsonRepresentation(v.toJSON());
+		serv.putResource("intervention/" + interId + "/vehicule", v.getUniqueID(), r);
 	}
 
 	public void deleteVehicule(Vehicule v) throws BadResponseException {
@@ -216,14 +206,14 @@ public class InterventionConnection implements InterventionApi{
 		List<Source> sources = new ArrayList<Source>();
 		JsonRepresentation representation = null;
 
-		// Récupération de la liste des messages
+		// Rï¿½cupï¿½ration de la liste des messages
 		Representation repr = serv.getResource("intervention/" + interId
 				+ "/source", null);
 
 		try {
 			representation = new JsonRepresentation(repr);
 
-			JSONArray ar = representation.getJsonArray(); // Récupération de la
+			JSONArray ar = representation.getJsonArray(); // Rï¿½cupï¿½ration de la
 															// liste des
 															// messages
 			// System.out.println(ar.toString());

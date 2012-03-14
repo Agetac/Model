@@ -15,25 +15,24 @@ import org.json.JSONException;
 
 public interface InterventionApi {
 
-	public Message getMessage(String msgId) throws BadResponseException;
+	public Message getMessage(String msgId) throws InvalidJSONException, BadResponseException;
 	public List<Message> getMessages() throws BadResponseException;
 	public void putMessage(Message msg) throws JSONException, BadResponseException;
 	public void postMessage(Message msg) throws JSONException, BadResponseException;
 	public void deleteMessage(Message msg) throws BadResponseException;
 	
 
-	public Vehicule getVehicule(String vId) throws BadResponseException;
+	public Vehicule getVehicule(String vId) throws InvalidJSONException, BadResponseException;
 	public List<Vehicule> getVehicules() throws BadResponseException;
-	public void putVehicule(Vehicule v) throws BadResponseException;
+	public void putVehicule(Vehicule v) throws BadResponseException, JSONException;
 	public void postVehicule(Vehicule v) throws JSONException, BadResponseException;
 	public void deleteVehicule(Vehicule v) throws BadResponseException;
 
-	public Source getSource(String sId) throws BadResponseException;
+	public Source getSource(String sId) throws InvalidJSONException, BadResponseException;
 	public List<Source> getSources() throws BadResponseException;
 	public void putSource(Source s) throws JSONException, BadResponseException;
 	public void postSource(Source s) throws JSONException, BadResponseException;
 	public void deleteSource(Source s) throws BadResponseException;
-	
 
 	public Cible getCible(String cId) throws InvalidJSONException, BadResponseException;
 	public List<Cible> getCibles() throws BadResponseException;
