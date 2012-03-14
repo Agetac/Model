@@ -14,6 +14,12 @@ public class Groupe extends AbstractModel {
 	private Agent chef;
 	private List<Vehicule> vehicules;
 
+	public Groupe() {
+		super("", null, null);
+		this.chef = null;
+		this.vehicules = new ArrayList<Vehicule>();
+	}
+	
 	public Groupe(String uid, Agent chef, List<Vehicule> vehicules) {
 		super(uid, null, null);
 		

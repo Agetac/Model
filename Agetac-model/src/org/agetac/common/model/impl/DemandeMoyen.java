@@ -20,8 +20,8 @@ public class DemandeMoyen extends AbstractModel {
 	private static final List<CategorieVehicule> VALUES_CategorieVehicule = Collections.unmodifiableList(Arrays.asList(CategorieVehicule.values()));
 	private static final int SIZE_CategorieVehicule = VALUES_CategorieVehicule.size();
 	
-	private static final List<EtatDemande> VALUES_EtatVehicule = Collections.unmodifiableList(Arrays.asList(EtatDemande.values()));
-	private static final int SIZE_EtatVehicule = VALUES_EtatVehicule.size();
+	private static final List<EtatDemande> VALUES_EtatDemande = Collections.unmodifiableList(Arrays.asList(EtatDemande.values()));
+	private static final int SIZE_EtatDemande = VALUES_EtatDemande.size();
 	
 	private EtatDemande etat;
 	private String groupeID;
