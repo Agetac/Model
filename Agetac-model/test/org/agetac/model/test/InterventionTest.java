@@ -61,8 +61,8 @@ public class InterventionTest {
 
 		List<Vehicule> vehicules = new ArrayList<Vehicule>();
 		Groupe g = new Groupe("g", null, null);
-		vehicules.add(new Vehicule("v1","fpt", new Position(12.155466,42.5555), null, "Janzé", Vehicule.EtatVehicule.ALERTE, g, "4242"));
-		vehicules.add(new Vehicule("v2","fpt", new Position(12.155466,42.5556), null, "Janzé", Vehicule.EtatVehicule.ALERTE, g, "1664"));
+		vehicules.add(new Vehicule("v1","Janze", new Position(12.155466,42.5555), CategorieVehicule.FPT, "Janzé", Vehicule.EtatVehicule.ALERTE, g, "4242"));
+		vehicules.add(new Vehicule("v2","Janze", new Position(12.155466,42.5556), CategorieVehicule.FPT, "Janzé", Vehicule.EtatVehicule.ALERTE, g, "1664"));
 		inter1.setVehicules(vehicules);
 		
 		JSONObject jinter1 = inter1.toJSON();
