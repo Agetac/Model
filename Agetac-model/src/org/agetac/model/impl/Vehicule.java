@@ -1,6 +1,5 @@
 package org.agetac.model.impl;
 
-import java.sql.Time;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -57,6 +56,7 @@ public class Vehicule extends AbstractModel {
 	private EtatVehicule etat;
 	private String groupeID;
 	private HashMap<EtatVehicule, String> groupesHoraires; 
+	private CategorieVehicule categorie;
 
 	public Vehicule(String uid, String nom, Position position, String caserneName, EtatVehicule etat, Groupe groupe) {
 		super(uid, nom, position);
@@ -74,8 +74,9 @@ public class Vehicule extends AbstractModel {
 		this.groupesHoraires.put(EtatVehicule.DEMOBILISE, randomGH());
 	}
 	
-	public Vehicule(String uid, String nom, Position position, String caserneName, EtatVehicule etat, Groupe groupe, String heure) {
+	public Vehicule(String uid, String nom, Position position, CategorieVehicule cat, String caserneName, EtatVehicule etat, Groupe groupe, String heure) {
 		super(uid, nom, position);
+		this.categorie = cat;
 		this.caserneName = caserneName;
 		this.etat = etat;
 		this.groupeID = groupe.getUniqueID();
@@ -103,6 +104,7 @@ public class Vehicule extends AbstractModel {
 	public Vehicule(JSONObject json) throws InvalidJSONException {
 		super(json);
 		try{
+			this.categorie = CategorieVehicule.valueOf(json.getString("categorie"));
 			this.etat = EtatVehicule.valueOf(json.getString("etat"));
 			this.groupeID = json.getString("groupeID");
 			this.caserneName = json.getString("caserneName");
@@ -121,6 +123,7 @@ public class Vehicule extends AbstractModel {
 
 		json.put("etat", this.etat.name());
 		json.put("groupeID", this.groupeID);
+		json.put("categorie", this.categorie);
 		json.put("caserneName", this.caserneName);
 		//TODO: Compléter avec la liste des groupe horaire
 		return json;
@@ -136,6 +139,14 @@ public class Vehicule extends AbstractModel {
 
 	public EtatVehicule getEtat() {
 		return etat;
+	}
+	
+	public CategorieVehicule getCategorie() {
+		return categorie;
+	}
+	
+	public void setCategorie(CategorieVehicule cat) {
+		this.categorie = cat;
 	}
 
 	public void setEtat(EtatVehicule etat) {
