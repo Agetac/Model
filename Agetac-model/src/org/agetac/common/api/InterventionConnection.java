@@ -153,7 +153,7 @@ public class InterventionConnection implements InterventionApi {
 
 	public void putVehicule(Vehicule v) throws BadResponseException, JSONException {
 		Representation r = new JsonRepresentation(v.toJSON());
-		serv.putResource("intervention/" + interId + "/vehicule", v.getUniqueID(), r);
+		serv.putResource("intervention/" + interId + "/vehicule", "new", r);
 	}
 
 	public void deleteVehicule(Vehicule v) throws BadResponseException {
