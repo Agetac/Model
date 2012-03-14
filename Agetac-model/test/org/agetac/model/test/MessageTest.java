@@ -1,7 +1,8 @@
 package org.agetac.model.test;
 
 import static org.junit.Assert.*;
-import org.agetac.model.impl.Message;
+
+import org.agetac.common.model.impl.Message;
 import org.json.JSONException;
 import org.junit.Test;
 

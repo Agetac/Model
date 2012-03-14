@@ -5,11 +5,11 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.agetac.model.exception.InvalidJSONException;
-import org.agetac.model.impl.Agent;
-import org.agetac.model.impl.Groupe;
-import org.agetac.model.impl.Position;
-import org.agetac.model.impl.Vehicule;
+import org.agetac.common.exception.InvalidJSONException;
+import org.agetac.common.model.impl.Agent;
+import org.agetac.common.model.impl.Groupe;
+import org.agetac.common.model.impl.Position;
+import org.agetac.common.model.impl.Vehicule;
 import org.json.JSONException;
 import org.junit.Test;
 

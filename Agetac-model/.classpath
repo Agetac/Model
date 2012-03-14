@@ -10,5 +10,8 @@
 	<classpathentry kind="lib" path="lib/jdo/datanucleus-core-3.0.6.jar"/>
 	<classpathentry kind="lib" path="lib/jdo/datanucleus-enhancer-3.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/jdo/jdo-api-3.1-SNAPSHOT-20110926.jar"/>
+	<classpathentry kind="lib" path="lib/restlet/org.restlet.ext.json.jar"/>
+	<classpathentry kind="lib" path="lib/restlet/org.restlet.jar"/>
+	<classpathentry kind="lib" path="lib/restlet/org.restlet.test.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
