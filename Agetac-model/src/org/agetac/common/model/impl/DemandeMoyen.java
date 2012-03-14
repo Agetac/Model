@@ -28,7 +28,7 @@ public class DemandeMoyen extends AbstractModel {
 	private HashMap<EtatDemande, String> groupesHoraires; 
 	private CategorieVehicule categorie;
 	
-	public DemandeMoyen(String uid, String nom, Position position, CategorieVehicule cat, String caserneName, EtatDemande etat, Groupe groupe, String heure) {
+	public DemandeMoyen(String uid, String nom, Position position, CategorieVehicule cat, EtatDemande etat, Groupe groupe, String heure) {
 		super(uid, nom, position);
 		this.categorie = cat;
 		this.etat = etat;
@@ -39,7 +39,7 @@ public class DemandeMoyen extends AbstractModel {
 	
 
 	
-	public DemandeMoyen(String uid, String nom, Position position, String caserneName, EtatDemande etat, String groupeID) {
+	public DemandeMoyen(String uid, String nom, Position position, EtatDemande etat, String groupeID) {
 		super(uid, nom, position);
 		this.etat = etat;
 		this.groupeID = groupeID;
