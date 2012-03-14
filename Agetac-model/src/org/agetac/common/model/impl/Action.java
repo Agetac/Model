@@ -18,6 +18,13 @@ public class Action extends AbstractModel {
 	private ActionType actionType;
 	private Position origin, aim;
 	
+	public Action() {
+		super("",null,new Position(0,0));
+		this.actionType = null;
+		this.origin = new Position(0,0);
+		this.aim = new Position(0,0);
+	}
+	
 	public Action(String uid, Position position, ActionType actionType, Position origin, Position aim) {
 		super(uid, null, position);
 		this.actionType = actionType;

@@ -7,6 +7,10 @@ import org.json.JSONObject;
 
 public class Source extends AbstractModel {
 	
+	public Source() {
+		super("", null, new Position(0,0));
+	}
+	
 	public Source(String uid, Position position) {
 		super(uid, null, position);
 	}

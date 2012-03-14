@@ -7,6 +7,10 @@ import org.json.JSONObject;
 
 public class Cible extends AbstractModel {
 	
+	public Cible() {
+		super("",null,new Position(0,0));
+	}
+	
 	public Cible(String uid, Position position) {
 		super(uid, null, position);
 	}
