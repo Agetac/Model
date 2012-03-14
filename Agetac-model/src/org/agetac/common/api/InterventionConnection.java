@@ -23,10 +23,8 @@ public class InterventionConnection implements InterventionApi {
 	private ServerApi serv;
 
 	public InterventionConnection(String interId, ServerApi serv) {
-
 		this.interId = interId;
 		this.serv = serv;
-
 	}
 
 	public Message getMessage(String msgId) throws BadResponseException {

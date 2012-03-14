@@ -28,51 +28,15 @@ public class Vehicule extends AbstractModel {
 	
 	private static final List<CategorieVehicule> VALUES_CategorieVehicule = Collections.unmodifiableList(Arrays.asList(CategorieVehicule.values()));
 	private static final int SIZE_CategorieVehicule = VALUES_CategorieVehicule.size();
-	private static final Random RANDOM_CV = new Random();
-	
-	public static CategorieVehicule randomCategorieVehicule()  {
-		return VALUES_CategorieVehicule.get(RANDOM_CV.nextInt(SIZE_CategorieVehicule));
-	}
 	
 	private static final List<EtatVehicule> VALUES_EtatVehicule = Collections.unmodifiableList(Arrays.asList(EtatVehicule.values()));
 	private static final int SIZE_EtatVehicule = VALUES_EtatVehicule.size();
-	private static final Random RANDOM_EV = new Random();
-	
-	public static EtatVehicule randomEtatVehicule()  {
-		return VALUES_EtatVehicule.get(RANDOM_EV.nextInt(SIZE_EtatVehicule));
-	}
-	
-	private static final Random RANDOM_GH = new Random();
-	public static String randomGH(){
-		int un, deux, trois, quatre;
-		un = RANDOM_GH.nextInt(2);
-		if(un < 2) deux = RANDOM_GH.nextInt(9); else deux = RANDOM_GH.nextInt(3);
-		trois = RANDOM_GH.nextInt(5);
-		quatre = RANDOM_GH.nextInt(9);
-		return ""+un+deux+trois+quatre;
-	}
 	
 	private String caserneName;
 	private EtatVehicule etat;
 	private String groupeID;
 	private HashMap<EtatVehicule, String> groupesHoraires; 
 	private CategorieVehicule categorie;
-
-	public Vehicule(String uid, String nom, Position position, String caserneName, EtatVehicule etat, Groupe groupe) {
-		super(uid, nom, position);
-		this.caserneName = caserneName;
-		this.etat = etat;
-		this.groupeID = groupe.getUniqueID();
-		this.groupesHoraires = new HashMap<EtatVehicule, String>();
-		this.groupesHoraires.put(EtatVehicule.DISPO_CASERNE, "");
-		this.groupesHoraires.put(EtatVehicule.ALERTE, randomGH());
-		this.groupesHoraires.put(EtatVehicule.PARTIS, randomGH());
-		this.groupesHoraires.put(EtatVehicule.SUR_LES_LIEUX, randomGH());
-		this.groupesHoraires.put(EtatVehicule.TRANSPORT_HOPITAL, "");
-		this.groupesHoraires.put(EtatVehicule.DISPO_RADIO, "");
-		this.groupesHoraires.put(EtatVehicule.TEMPS_DEPASSE, "");
-		this.groupesHoraires.put(EtatVehicule.DEMOBILISE, randomGH());
-	}
 	
 	public Vehicule(String uid, String nom, Position position, CategorieVehicule cat, String caserneName, EtatVehicule etat, Groupe groupe, String heure) {
 		super(uid, nom, position);
@@ -123,7 +87,7 @@ public class Vehicule extends AbstractModel {
 
 		json.put("etat", this.etat.name());
 		json.put("groupeID", this.groupeID);
-		json.put("categorie", this.categorie);
+		json.put("categorie", this.categorie.name());
 		json.put("caserneName", this.caserneName);
 		//TODO: Compléter avec la liste des groupe horaire
 		return json;
@@ -181,7 +145,4 @@ public class Vehicule extends AbstractModel {
 			return "Error";
 		}
 	}
-
-
-
 }
