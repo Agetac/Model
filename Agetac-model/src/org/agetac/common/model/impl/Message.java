@@ -1,15 +1,18 @@
 package org.agetac.common.model.impl;
 
-import org.agetac.common.model.sign.IJsonable;
-import org.json.JSONException;
-import org.json.JSONObject;
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.PersistenceCapable;
 
-public class Message implements IJsonable {
+@PersistenceCapable
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
+public class Message {
 	
 	private String uniqueID;
 	private String message;
 	private String date;
-
+	private Intervention intervention;
+	
 	public Message(String uniqueID, String message, String date) {
 		if(uniqueID == null){
 			this.uniqueID = "";
@@ -18,18 +21,6 @@ public class Message implements IJsonable {
 		}
 		this.message = message;
 		this.date = date;
-	}
-
-	public Message(JSONObject json) {
-		
-		try {
-			this.setUniqueID(json.getString("uniqueID"));
-			this.message = json.getString("message");
-			this.date = json.getString("date");
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public String getMessage() {
@@ -54,31 +45,6 @@ public class Message implements IJsonable {
 
 	public void setUniqueID(String uniqueID) {
 		this.uniqueID = uniqueID;
-	}
-
-
-	/**
-	 * Cree un JSONObject representant le Message
-	 * @throws JSONException 
-	 */
-	public JSONObject toJSON() throws JSONException {
-
-		JSONObject json = new JSONObject();
-
-		json.put("uniqueID", this.uniqueID);
-		json.put("message", this.message);
-		json.put("date", this.date);
-
-
-		return json;
-	}
-
-	public String toString() {
-		try {
-			return this.toJSON().toString();
-		} catch (JSONException e) {
-			return "Error";
-		}
 	}
 
 }

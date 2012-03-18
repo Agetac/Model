@@ -12,10 +12,12 @@ import org.agetac.common.model.impl.Implique;
 import org.agetac.common.model.impl.Message;
 import org.agetac.common.model.impl.Source;
 import org.agetac.common.model.impl.Vehicule;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 
 public class InterventionConnection implements InterventionApi {
 
@@ -29,17 +31,13 @@ public class InterventionConnection implements InterventionApi {
 
 	public Message getMessage(String msgId) throws BadResponseException {
 		Message m = null;
-		JsonRepresentation representation = null;
 
 		Representation repr = serv.getResource("intervention/" + interId
 				+ "/message", msgId);
 
 		try {
-			representation = new JsonRepresentation(repr);
-			m = new Message(representation.getJsonObject());
+			m = new Gson().fromJson(repr.getReader(), Message.class);
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 
@@ -49,57 +47,50 @@ public class InterventionConnection implements InterventionApi {
 	public List<Message> getMessages() throws BadResponseException {
 
 		List<Message> messages = new ArrayList<Message>();
-		JsonRepresentation representation = null;
 
 		// R�cup�ration de la liste des messages
 		Representation repr = serv.getResource("intervention/" + interId
 				+ "/message", null);
 
 		try {
-			representation = new JsonRepresentation(repr);
 
-			JSONArray ar = representation.getJsonArray(); // R�cup�ration de la
-															// liste des
-															// messages
-
-			for (int i = 0; i < ar.length(); i++) {
-				messages.add(new Message(ar.getJSONObject(i)));
-			}
+			messages = new Gson().fromJson(repr.getReader(),
+					(Class<List<Message>>) (Class<?>) List.class);
 
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 
 		return messages;
 	}
 
-	public Message putMessage(Message msg) throws JSONException, BadResponseException {
+	public Message putMessage(Message msg) throws BadResponseException {
 
-		Representation r = new JsonRepresentation(msg.toJSON());
+		Representation r = new JsonRepresentation(new Gson().toJson(msg));
 		r = serv.putResource("intervention/" + interId + "/message", null, r);
-		
+
 		try {
-			return new Message(new JsonRepresentation(r).getJsonObject());
+			return new Gson().fromJson(new JsonRepresentation(r).getReader(),
+					Message.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
-	public void postMessage(Message msg) throws JSONException,
-			BadResponseException {
+	public void postMessage(Message msg) throws BadResponseException {
 
-		Representation r = new JsonRepresentation(msg.toJSON());
+		Representation r = new JsonRepresentation(new Gson().toJson(msg));
 
-		serv.postResource("intervention/" + interId + "/message", msg.getUniqueID(), r);
+		serv.postResource("intervention/" + interId + "/message",
+				msg.getUniqueID(), r);
 
 	}
 
 	public void deleteMessage(Message msg) throws BadResponseException {
-		serv.deleteResource("intervention/" + interId + "/message",	msg.getUniqueID());
+		serv.deleteResource("intervention/" + interId + "/message",
+				msg.getUniqueID());
 	}
 
 	public Vehicule getVehicule(String vId) throws BadResponseException {
@@ -116,10 +107,15 @@ public class InterventionConnection implements InterventionApi {
 		}
 
 		try {
-			v = new Vehicule(representation.getJsonObject());
-		} catch (InvalidJSONException e) {
+			v = new Gson().fromJson(representation.getReader(), Vehicule.class);
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (JSONException e) {
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -138,13 +134,8 @@ public class InterventionConnection implements InterventionApi {
 		try {
 			representation = new JsonRepresentation(repr);
 
-			JSONArray ar = representation.getJsonArray(); // R�cup�ration de la
-															// liste des
-															// vehicules
-
-			for (int i = 0; i < ar.length(); i++) {
-				vehicules.add(new Vehicule(ar.getJSONObject(i)));
-			}
+			vehicules = new Gson().fromJson(repr.getReader(),
+					(Class<List<Vehicule>>) (Class<?>) List.class);
 
 		} catch (Exception e) {
 			System.out.println("Error: " + e.toString());
@@ -153,32 +144,33 @@ public class InterventionConnection implements InterventionApi {
 		return vehicules;
 	}
 
-	public Vehicule putVehicule(Vehicule v) throws BadResponseException, JSONException {
-		
-		Representation r = new JsonRepresentation(v.toJSON());
+	public Vehicule putVehicule(Vehicule v) throws BadResponseException {
+
+		Representation r = new JsonRepresentation(new Gson().toJson(v));
 
 		r = serv.putResource("intervention/" + interId + "/vehicule", null, r);
-		
+
 		try {
-			return new Vehicule(new JsonRepresentation(r).getJsonObject());
+			return new Gson().fromJson(new JsonRepresentation(r).getReader(),
+					Vehicule.class);
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (InvalidJSONException e) {
-			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
 	public void deleteVehicule(Vehicule v) throws BadResponseException {
-		serv.deleteResource("intervention/" + interId + "/vehicule", v.getUniqueID());
+		serv.deleteResource("intervention/" + interId + "/vehicule",
+				v.getUniqueID());
 	}
 
 	public Source getSource(String sId) throws BadResponseException {
 		Source s = null;
 		JsonRepresentation representation = null;
 
-		Representation repr = serv.getResource("intervention/" + interId + "/source", sId);
+		Representation repr = serv.getResource("intervention/" + interId
+				+ "/source", sId);
 
 		try {
 			representation = new JsonRepresentation(repr);
@@ -187,29 +179,41 @@ public class InterventionConnection implements InterventionApi {
 		}
 
 		try {
-			s = new Source(representation.getJsonObject());
-		} catch (InvalidJSONException e) {
+			s = new Gson().fromJson(representation.getReader(), Source.class);
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (JSONException e) {
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return s;
 	}
 
-	public Source putSource(Source s) throws JSONException, BadResponseException {
+	public Source putSource(Source s) throws BadResponseException {
 
-		Representation r = new JsonRepresentation(s.toJSON());
+		Representation r = new JsonRepresentation(new Gson().toJson(s));
 
-		serv.putResource("intervention/" + interId + "/source",	null, r);
-		
+		serv.putResource("intervention/" + interId + "/source", null, r);
+
 		try {
-			return new Source(new JsonRepresentation(r).getJsonObject());
-		} catch (IOException e) {
+			return new Gson().fromJson(new JsonRepresentation(r).getReader(),
+					Source.class);
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InvalidJSONException e) {
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		return null;
 
 	}
@@ -231,16 +235,8 @@ public class InterventionConnection implements InterventionApi {
 		try {
 			representation = new JsonRepresentation(repr);
 
-			JSONArray ar = representation.getJsonArray(); // R�cup�ration de la
-															// liste des
-															// messages
-			// System.out.println(ar.toString());
-
-			for (int i = 0; i < ar.length(); i++) {
-				Source src = new Source(ar.getJSONObject(i));
-				// System.out.println(src.getUniqueID());
-				sources.add(src);
-			}
+			sources = new Gson().fromJson(representation.getReader(),
+					(Class<List<Source>>) (Class<?>) List.class);
 
 		} catch (Exception e) {
 			System.out.println("Error: " + e.toString());
@@ -264,28 +260,42 @@ public class InterventionConnection implements InterventionApi {
 		}
 
 		try {
-			c = new Cible(representation.getJsonObject());
-		} catch (JSONException e) {
+			c = new Gson().fromJson(representation.getReader(), Cible.class);
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return c;
 	}
 
-	public Cible putCible(Cible c) throws JSONException, BadResponseException {
-		
-		Representation r = new JsonRepresentation(c.toJSON());
-		serv.putResource("intervention/" + interId + "/cible", null,r);
-		
+	public Cible putCible(Cible c) throws BadResponseException {
+
+		Representation r = new JsonRepresentation(new Gson().toJson(c));
+		serv.putResource("intervention/" + interId + "/cible", null, r);
+
 		try {
-			return new Cible(new JsonRepresentation(r).getJsonObject());
-		} catch (IOException e) {
+			return new Gson().fromJson(new JsonRepresentation(r).getReader(),
+					Cible.class);
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InvalidJSONException e) {
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		return null;
-		
+
 	}
 
 	public void deleteCible(Cible c) throws BadResponseException {
@@ -308,26 +318,39 @@ public class InterventionConnection implements InterventionApi {
 		}
 
 		try {
-			a = new Action(representation.getJsonObject());
-		} catch (JSONException e) {
+			a = new Gson().fromJson(representation.getReader(), Action.class);
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return a;
 	}
 
-	public Action putAction(Action a) throws JSONException, BadResponseException {
-		Representation r = new JsonRepresentation(a.toJSON());
-		serv.putResource("intervention/" + interId + "/cible", null,
-				r);
-		
+	public Action putAction(Action a) throws BadResponseException {
+		Representation r = new JsonRepresentation(new Gson().toJson(a));
+		serv.putResource("intervention/" + interId + "/cible", null, r);
+
 		try {
-			return new Action(new JsonRepresentation(r).getJsonObject());
-		} catch (IOException e) {
+			return new Gson().fromJson(new JsonRepresentation(r).getReader(),
+					Action.class);
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InvalidJSONException e) {
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		return null;
 	}
 
@@ -351,27 +374,39 @@ public class InterventionConnection implements InterventionApi {
 		}
 
 		try {
-			i = new Implique(representation.getJsonObject());
-		} catch (JSONException e) {
+			i = new Gson().fromJson(representation.getReader(), Implique.class);
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return i;
 	}
 
-	public Implique putImplique(Implique i) throws JSONException,
-			BadResponseException {
-		Representation r = new JsonRepresentation(i.toJSON());
-		serv.putResource("intervention/" + interId + "/implique",
-				null, r);
-		
+	public Implique putImplique(Implique i) throws BadResponseException {
+		Representation r = new JsonRepresentation(new Gson().toJson(i));
+		serv.putResource("intervention/" + interId + "/implique", null, r);
+
 		try {
-			return new Implique(new JsonRepresentation(r).getJsonObject());
-		} catch (IOException e) {
+			return new Gson().fromJson(new JsonRepresentation(r).getReader(),
+					Implique.class);
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InvalidJSONException e) {
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		return null;
 	}
 
@@ -381,16 +416,15 @@ public class InterventionConnection implements InterventionApi {
 	}
 
 	@Override
-	public void postVehicule(Vehicule v) throws JSONException,
-			BadResponseException {
+	public void postVehicule(Vehicule v) throws BadResponseException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void postSource(Source s) throws JSONException, BadResponseException {
+	public void postSource(Source s) throws BadResponseException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -400,9 +434,9 @@ public class InterventionConnection implements InterventionApi {
 	}
 
 	@Override
-	public void postCible(Cible c) throws JSONException, BadResponseException {
+	public void postCible(Cible c) throws BadResponseException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -412,9 +446,9 @@ public class InterventionConnection implements InterventionApi {
 	}
 
 	@Override
-	public void postAction(Action c) throws JSONException, BadResponseException {
+	public void postAction(Action c) throws BadResponseException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -424,9 +458,8 @@ public class InterventionConnection implements InterventionApi {
 	}
 
 	@Override
-	public void postImplique(Implique c) throws JSONException,
-			BadResponseException {
+	public void postImplique(Implique c) throws BadResponseException {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

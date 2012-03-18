@@ -1,34 +1,22 @@
 package org.agetac.common.model.impl;
 
-import org.agetac.common.exception.InvalidJSONException;
-import org.agetac.common.model.sign.AbstractModel;
-import org.json.JSONException;
-import org.json.JSONObject;
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.PersistenceCapable;
 
+import org.agetac.common.model.sign.AbstractModel;
+
+@PersistenceCapable
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 public class Source extends AbstractModel {
 	
+	private Intervention intervention;
+	
 	public Source() {
-		super("", null, new Position(0,0));
+		super(null, null);
 	}
 	
-	public Source(String uid, Position position) {
-		super(uid, null, position);
-	}
-
-	public Source(JSONObject json) throws InvalidJSONException {
-		super(json);
-	}
-	
-	@Override
-	public JSONObject toJSON() throws JSONException {
-		return super.toJSON();
-	}
-
-	public String toString() {
-		try {
-			return this.toJSON().toString();
-		} catch (JSONException e) {
-			return "Error";
-		}
+	public Source(Position position) {
+		super(null, position);
 	}
 }

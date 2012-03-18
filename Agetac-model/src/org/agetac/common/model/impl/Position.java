@@ -1,27 +1,19 @@
 package org.agetac.common.model.impl;
 
-import org.agetac.common.exception.InvalidJSONException;
-import org.agetac.common.model.sign.IJsonable;
-import org.json.JSONException;
-import org.json.JSONObject;
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.PersistenceCapable;
 
-public class Position implements IJsonable {
-	
+@PersistenceCapable
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
+public class Position {
+
 	private double longitude;
 	private double latitude;
 
 	public Position(double longitude, double latitude) {
 		this.longitude = longitude;
 		this.latitude = latitude;
-	}
-	
-	public Position(JSONObject json) throws InvalidJSONException{
-		try {
-			this.longitude = json.getDouble("longitude");
-			this.latitude = json.getDouble("latitude");
-		} catch (JSONException e) {
-			throw new InvalidJSONException(json.toString());
-		}
 	}
 
 	public double getLongitude() {
@@ -38,26 +30,6 @@ public class Position implements IJsonable {
 
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
-	}
-
-	@Override
-	public JSONObject toJSON() throws JSONException {
-		JSONObject json = new JSONObject();
-		json.put("longitude", this.longitude);
-		json.put("latitude", this.latitude);
-		
-		return json;
-	}
-	
-	/**
-	 * Convert this object to a string for representation
-	 */
-	public String toString() {
-		try {
-			return this.toJSON().toString();
-		} catch (JSONException e) {
-			return "Error";
-		}
 	}
 
 }

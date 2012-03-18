@@ -1,61 +1,35 @@
 package org.agetac.common.model.impl;
 
-import org.agetac.common.exception.InvalidJSONException;
-import org.agetac.common.model.impl.Agent.Aptitude;
-import org.agetac.common.model.sign.AbstractModel;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.PersistenceCapable;
 
+import org.agetac.common.model.impl.Action.ActionType;
+import org.agetac.common.model.sign.AbstractModel;
+
+@PersistenceCapable
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 public class Action extends AbstractModel {
 
 	public enum ActionType {
-		FIRE,
-		WATER,
-		VICTIM
+		FIRE, WATER, VICTIM
 	}
+
+	private Intervention intervention;
 	
 	private ActionType actionType;
 	private Position origin, aim;
-	
+
 	public Action() {
-		super("",null,new Position(0,0));
+		super(null, new Position(0, 0));
 		this.actionType = null;
-		this.origin = new Position(0,0);
-		this.aim = new Position(0,0);
-	}
-	
-	public Action(String uid, Position position, ActionType actionType, Position origin, Position aim) {
-		super(uid, null, position);
-		this.actionType = actionType;
-		this.origin = origin;
-		this.aim = aim;
+		this.origin = new Position(0, 0);
+		this.aim = new Position(0, 0);
 	}
 
-	public Action(JSONObject json) throws InvalidJSONException, JSONException {
-		super(json);
-		this.actionType = ActionType.valueOf(json.getString("actionType"));
-		this.origin = new Position(json.getJSONObject("origin"));
-		this.aim = new Position(json.getJSONObject("aim"));
-		
+	public Action(Position lineMiddlePos, ActionType fire,
+			Position lineBeginPos, Position lineEndPos) {
+		super(null, lineMiddlePos);
 	}
-
-	public String toString() {
-		try {
-			return this.toJSON().toString();
-		} catch (JSONException e) {
-			return "Error";
-		}
-	}
-
-	public JSONObject toJSON() throws JSONException {
-		JSONObject json = super.toJSON();
-		
-		json.put("actionType", actionType.name());
-		
-		json.put("origin", origin.toJSON());
-		json.put("aim", aim.toJSON());
-
-		return json;	}
 
 }
