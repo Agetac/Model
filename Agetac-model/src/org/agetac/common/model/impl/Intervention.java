@@ -21,6 +21,9 @@ public class Intervention extends AbstractModel {
 	private List<Action> actions;
 	private List<Message> messages;
 	private List<Implique> impliques;
+	private List<DemandeMoyen> demandes_moyen;
+
+
 
 	public Intervention() {
 		super(null, null, new Position(0, 0));
@@ -30,6 +33,7 @@ public class Intervention extends AbstractModel {
 		this.actions = new ArrayList<Action>();
 		this.messages = new ArrayList<Message>();
 		this.impliques = new ArrayList<Implique>();
+		this.demandes_moyen = new ArrayList<DemandeMoyen>();
 	}
 
 	public Intervention(String uid) {
@@ -40,6 +44,7 @@ public class Intervention extends AbstractModel {
 		this.actions = new ArrayList<Action>();
 		this.messages = new ArrayList<Message>();
 		this.impliques = new ArrayList<Implique>();
+		this.demandes_moyen = new ArrayList<DemandeMoyen>();
 	}
 
 	public Intervention(JSONObject json) throws InvalidJSONException {
@@ -51,6 +56,7 @@ public class Intervention extends AbstractModel {
 		this.actions = new ArrayList<Action>();
 		this.messages = new ArrayList<Message>();
 		this.impliques = new ArrayList<Implique>();
+		this.demandes_moyen = new ArrayList<DemandeMoyen>();
 
 		try {
 			JSONArray jsar = json.getJSONArray("vehicules");
@@ -81,6 +87,11 @@ public class Intervention extends AbstractModel {
 			jsar = json.getJSONArray("impliques");
 			for (int i = 0; i < jsar.length(); i++) {
 				impliques.add(new Implique(jsar.getJSONObject(i)));
+			}
+			
+			jsar = json.getJSONArray("demandes_moyen");
+			for (int i = 0; i < jsar.length(); i++) {
+				demandes_moyen.add(new DemandeMoyen(jsar.getJSONObject(i)));
 			}
 		} catch (JSONException e) {
 			throw new InvalidJSONException(json.toString());
@@ -147,6 +158,14 @@ public class Intervention extends AbstractModel {
 		}
 		json.put("impliques", array_impliques);
 
+		JSONArray array_demandes_moyen = new JSONArray();
+		if (this.demandes_moyen != null) {
+			for (int i = 0; i < this.demandes_moyen.size(); i++) {
+				array_demandes_moyen.put(i, this.demandes_moyen.get(i).toJSON());
+			}
+		}
+		json.put("demandes_moyen", array_demandes_moyen);
+		
 		return json;
 	}
 
@@ -199,5 +218,13 @@ public class Intervention extends AbstractModel {
 
 	public void setImpliques(List<Implique> impliques) {
 		this.impliques = impliques;
+	}
+	
+	public List<DemandeMoyen> getDemandesMoyen() {
+		return demandes_moyen;
+	}
+
+	public void setDemandesMoyen(List<DemandeMoyen> demandes_moyen) {
+		this.demandes_moyen = demandes_moyen;
 	}
 }
