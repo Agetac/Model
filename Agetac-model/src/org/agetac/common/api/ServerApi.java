@@ -9,7 +9,7 @@ public interface ServerApi {
 	
 	public Representation putResource(String resType, String resUniqueID,	Representation resRepresentation) throws BadResponseException;
 	
-	public void postResource(String resType, String resUniqueID, Representation resRepresentation) throws BadResponseException;
+	public Representation postResource(String resType, String resUniqueID, Representation resRepresentation) throws BadResponseException;
 	
 	public void deleteResource(String resType, String resUniqueID) throws BadResponseException;
 	

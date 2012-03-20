@@ -52,11 +52,10 @@ public class Action extends AbstractModel {
 		JSONObject json = super.toJSON();
 		
 		json.put("actionType", actionType.name());
-		
 		json.put("origin", origin.toJSON());
 		json.put("aim", aim.toJSON());
-
-		return json;	}
+		return json;	
+	}
 	
 	public void setOrigin(Position origin) {
 		this.origin = origin;

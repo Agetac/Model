@@ -28,6 +28,16 @@ public class DemandeMoyen extends AbstractModel {
 	private HashMap<EtatDemande, String> groupesHoraires; 
 	private CategorieVehicule categorie;
 	
+	private String vehId = null; // l'id du vehicule résultat de la demande
+	
+	public String getVehId() {
+		return vehId;
+	}
+
+	public void setVehId(String vehId) {
+		this.vehId = vehId;
+	}
+
 	public DemandeMoyen() {
 		super("42","demande",new Position(0,0));
 		this.etat = null;
@@ -61,6 +71,7 @@ public class DemandeMoyen extends AbstractModel {
 			this.etat = EtatDemande.valueOf(json.getString("etat"));
 			this.groupeID = json.getString("groupeID");
 			//TODO: ComplÃ©ter avec la liste des groupe horaire
+			this.groupesHoraires = new HashMap<EtatDemande, String>();
 		}catch(JSONException e){
 			throw new InvalidJSONException(json.toString());
 		}
@@ -95,6 +106,7 @@ public class DemandeMoyen extends AbstractModel {
 	}
 
 	public void setEtat(EtatDemande etat) {
+		
 		this.etat = etat;
 	}
 
