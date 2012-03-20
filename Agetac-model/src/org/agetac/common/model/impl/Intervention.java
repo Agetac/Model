@@ -8,29 +8,18 @@ import javax.jdo.annotations.PersistenceCapable;
 
 import org.agetac.common.exception.InvalidJSONException;
 import org.agetac.common.model.sign.AbstractModel;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-@PersistenceCapable
 public class Intervention extends AbstractModel {
 
-	@NotPersistent
 	private List<Vehicule> vehicules;
-	
-	@NotPersistent
 	private List<Cible> cibles;
-	
-	@NotPersistent
 	private List<Source> sources;
-	
-	@NotPersistent
 	private List<Action> actions;
-	
-	@NotPersistent
 	private List<Message> messages;
-	
-	@NotPersistent
 	private List<Implique> impliques;
 
 	public Intervention() {

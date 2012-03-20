@@ -1,33 +1,33 @@
 package org.agetac.common.model.sign;
 
-import javax.jdo.annotations.PersistenceCapable;
 
 import org.agetac.common.exception.InvalidJSONException;
 import org.agetac.common.model.impl.Position;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-@PersistenceCapable
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class AbstractModel implements IJsonable, IModel {
 
 	protected String uniqueID;
-	protected String name;
+	protected String nom;
 	protected Position position;
 
-	public AbstractModel(String name, Position position){
-		if (name == null) {
-			name = "";
+	public AbstractModel(String nom, Position position){
+		if (nom == null) {
+			nom = "";
 		}
 		if (position == null) {
 			position = new Position(0, 0);
 		}
 		
-		this.name = name;
+		this.nom = nom;
 		this.position = position;
 	}
 	
-	public AbstractModel(String uid, String name, Position position) {
-		this(name, position);
+	public AbstractModel(String uid, String nom, Position position) {
+		this(nom, position);
 		if (uid == null) {
 			uid = "";
 		}
@@ -35,10 +35,9 @@ public abstract class AbstractModel implements IJsonable, IModel {
 	}
 
 	public AbstractModel(JSONObject json) throws InvalidJSONException {
-		// System.out.println(json.toString());
 		try {
 			this.uniqueID = json.getString("uniqueID");
-			this.name = json.getString("nom");
+			this.nom = json.getString("nom");
 			this.position = new Position(json.getJSONObject("position"));
 		} catch (JSONException e) {
 			throw new InvalidJSONException(json.toString());
@@ -56,7 +55,7 @@ public abstract class AbstractModel implements IJsonable, IModel {
 		JSONObject json = new JSONObject();
 
 		json.put("uniqueID", this.uniqueID);
-		json.put("nom", this.name);
+		json.put("nom", this.nom);
 		json.put("position", this.position.toJSON());
 
 		return json;
@@ -74,12 +73,12 @@ public abstract class AbstractModel implements IJsonable, IModel {
 
 	@Override
 	public String getName() {
-		return name;
+		return nom;
 	}
 
 	@Override
 	public void setName(String name) {
-		this.name = name;
+		this.nom = name;
 	}
 
 	@Override

@@ -38,6 +38,10 @@ public class Vehicule extends AbstractModel {
 	private HashMap<EtatVehicule, String> groupesHoraires; 
 	private CategorieVehicule categorie;
 	
+	public Vehicule() {
+		super(null, null, new Position(0, 0));
+	}
+	
 	public Vehicule(String uid, Position position, CategorieVehicule cat, String caserneName, EtatVehicule etat, Groupe groupe, String heure) {
 		super(uid, cat.name()+" "+caserneName, position);
 		this.categorie = cat;
@@ -124,9 +128,11 @@ public class Vehicule extends AbstractModel {
 	public void setGroupe(Groupe groupe) {
 		this.groupeID = groupe.getUniqueID();
 	}
-	public void setGroupe(String groupeID) {
+	
+	public void setGroupeID(String groupeID) {
 		this.groupeID = groupeID;
 	}
+
 	public HashMap<EtatVehicule, String> getGroupesHoraires() {
 		return groupesHoraires;
 	}

@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="lib/restlet/org.restlet.ext.json.jar"/>
 	<classpathentry kind="lib" path="lib/restlet/org.restlet.jar"/>
 	<classpathentry kind="lib" path="lib/restlet/org.restlet.test.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-core-asl-1.9.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

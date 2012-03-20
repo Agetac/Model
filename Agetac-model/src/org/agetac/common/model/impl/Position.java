@@ -9,6 +9,11 @@ public class Position implements IJsonable {
 	
 	private double longitude;
 	private double latitude;
+	
+	public Position() {
+		longitude = 0;
+		latitude = 0;
+	}
 
 	public Position(double longitude, double latitude) {
 		this.longitude = longitude;
