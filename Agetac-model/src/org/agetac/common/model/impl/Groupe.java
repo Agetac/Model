@@ -15,7 +15,7 @@ public class Groupe extends AbstractModel {
 	private List<Vehicule> vehicules;
 
 	public Groupe() {
-		super("", null, null);
+		super("42", null, null);
 		this.chef = null;
 		this.vehicules = new ArrayList<Vehicule>();
 	}

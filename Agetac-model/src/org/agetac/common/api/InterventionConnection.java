@@ -8,6 +8,7 @@ import org.agetac.common.exception.BadResponseException;
 import org.agetac.common.exception.InvalidJSONException;
 import org.agetac.common.model.impl.Action;
 import org.agetac.common.model.impl.Cible;
+import org.agetac.common.model.impl.DemandeMoyen;
 import org.agetac.common.model.impl.Implique;
 import org.agetac.common.model.impl.Message;
 import org.agetac.common.model.impl.Source;
@@ -172,6 +173,27 @@ public class InterventionConnection implements InterventionApi {
 
 	public void deleteVehicule(Vehicule v) throws BadResponseException {
 		serv.deleteResource("intervention/" + interId + "/vehicule", v.getUniqueID());
+	}
+	
+	public DemandeMoyen putDemandeMoyen(DemandeMoyen dm) throws BadResponseException, JSONException {
+		
+		Representation r = new JsonRepresentation(dm.toJSON());
+
+		r = serv.putResource("intervention/" + interId + "/demandeMoyen", null, r);
+		
+		try {
+			return new DemandeMoyen(new JsonRepresentation(r).getJsonObject());
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InvalidJSONException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	public void deleteDemandeMOyen(DemandeMoyen dm) throws BadResponseException {
+		serv.deleteResource("intervention/" + interId + "/demandeMoyen", dm.getUniqueID());
 	}
 
 	public Source getSource(String sId) throws BadResponseException {

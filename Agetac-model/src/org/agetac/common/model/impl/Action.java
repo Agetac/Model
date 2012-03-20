@@ -19,7 +19,7 @@ public class Action extends AbstractModel {
 	private Position origin, aim;
 	
 	public Action() {
-		super("",null,new Position(0,0));
+		super("42",null,new Position(0,0));
 		this.actionType = null;
 		this.origin = new Position(0,0);
 		this.aim = new Position(0,0);
@@ -57,5 +57,27 @@ public class Action extends AbstractModel {
 		json.put("aim", aim.toJSON());
 
 		return json;	}
+	
+	public void setOrigin(Position origin) {
+		this.origin = origin;
+	}
+	public void setAim(Position aim) {
+		this.aim = aim;
+	}
+	public void setActionType(ActionType actionType) {
+		this.actionType = actionType;
+	}
+	
+	public Position getOrigin() {
+		return origin;
+	}
+	public Position getAim() {
+		return aim;
+	}
+	
+	public ActionType getActionType() {
+		return actionType;
+	}
+
 
 }

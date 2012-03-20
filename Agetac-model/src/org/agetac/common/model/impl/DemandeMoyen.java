@@ -29,7 +29,7 @@ public class DemandeMoyen extends AbstractModel {
 	private CategorieVehicule categorie;
 	
 	public DemandeMoyen() {
-		super("","",new Position(0,0));
+		super("42","demande",new Position(0,0));
 		this.etat = null;
 		this.groupeID = "";
 		this.groupesHoraires = new HashMap<EtatDemande, String>();

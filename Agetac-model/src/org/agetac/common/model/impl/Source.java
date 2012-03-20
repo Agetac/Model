@@ -8,7 +8,7 @@ import org.json.JSONObject;
 public class Source extends AbstractModel {
 	
 	public Source() {
-		super("", null, new Position(0,0));
+		super("42", null, new Position(0,0));
 	}
 	
 	public Source(String uid, Position position) {
