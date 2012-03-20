@@ -158,7 +158,7 @@ public class InterventionConnection implements InterventionApi {
 		
 		Representation r = new JsonRepresentation(v.toJSON());
 
-		r = serv.putResource("intervention/" + interId + "/vehicule", "new", r);
+		r = serv.putResource("intervention/" + interId + "/vehicule", null, r);
 		
 		try {
 			return new Vehicule(new JsonRepresentation(r).getJsonObject());
@@ -179,7 +179,7 @@ public class InterventionConnection implements InterventionApi {
 		
 		Representation r = new JsonRepresentation(dm.toJSON());
 
-		r = serv.putResource("intervention/" + interId + "/demandeMoyen", null, r);
+		r = serv.putResource("intervention/" + interId + "/demande", null, r);
 		
 		try {
 			return new DemandeMoyen(new JsonRepresentation(r).getJsonObject());

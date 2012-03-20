@@ -105,7 +105,7 @@ public class DemandeMoyen extends AbstractModel {
 	public void setGroupe(Groupe groupe) {
 		this.groupeID = groupe.getUniqueID();
 	}
-	public void setGroupe(String groupeID) {
+	public void setGroupeID(String groupeID) {
 		this.groupeID = groupeID;
 	}
 	public HashMap<EtatDemande, String> getGroupesHoraires() {

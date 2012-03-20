@@ -6,10 +6,12 @@ import org.agetac.common.exception.BadResponseException;
 import org.agetac.common.exception.InvalidJSONException;
 import org.agetac.common.model.impl.Action;
 import org.agetac.common.model.impl.Cible;
+import org.agetac.common.model.impl.DemandeMoyen;
 import org.agetac.common.model.impl.Implique;
 import org.agetac.common.model.impl.Message;
 import org.agetac.common.model.impl.Source;
 import org.agetac.common.model.impl.Vehicule;
+import org.agetac.common.model.sign.IModel;
 
 import org.json.JSONException;
 
@@ -51,5 +53,6 @@ public interface InterventionApi {
 	public Implique putImplique(Implique i) throws JSONException, BadResponseException;
 	public void postImplique(Implique c) throws JSONException, BadResponseException;
 	public void deleteImplique(Implique a) throws BadResponseException;
-
+	
+	public DemandeMoyen putDemandeMoyen(DemandeMoyen dm) throws BadResponseException, JSONException;
 }
