@@ -52,10 +52,6 @@ public class InterventionConnection implements InterventionApi {
 		return i;
 	}
 	
-	
-	
-	
-	
 	@Override
 	public Message getMessage(String msgId) throws BadResponseException {
 		Message m = null;
@@ -104,14 +100,14 @@ public class InterventionConnection implements InterventionApi {
 
 		Representation r = new JsonRepresentation(msg.toJSON());
 		r = serv.putResource("intervention/" + interId + "/message", null, r);
-
+		Message message = null;
 		try {
-			return new Message(new JsonRepresentation(r).getJsonObject());
+			message = new Message(new JsonRepresentation(r).getJsonObject());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return null;
+		return message;
 	}
 	@Override
 	public Message postMessage(Message msg) throws JSONException, BadResponseException {
@@ -130,8 +126,7 @@ public class InterventionConnection implements InterventionApi {
 	}
 	@Override
 	public void deleteMessage(Message msg) throws BadResponseException {
-		serv.deleteResource("intervention/" + interId + "/message",
-				msg.getUniqueID());
+		serv.deleteResource("intervention/" + interId + "/message",	msg.getUniqueID());
 	}
 	
 	@Override
@@ -187,9 +182,9 @@ public class InterventionConnection implements InterventionApi {
 		Representation r = new JsonRepresentation(v.toJSON());
 
 		r = serv.putResource("intervention/" + interId + "/vehicule", null, r);
-
+		Vehicule vehicule = null;
 		try {
-			return new Vehicule(new JsonRepresentation(r).getJsonObject());
+			vehicule = new Vehicule(new JsonRepresentation(r).getJsonObject());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InvalidJSONException e) {
@@ -291,16 +286,16 @@ public class InterventionConnection implements InterventionApi {
 		Representation r = new JsonRepresentation(dm.toJSON());
 
 		r = serv.putResource("intervention/" + interId + "/demande", null, r);
-
+		DemandeMoyen demande = null;
 		try {
-			return new DemandeMoyen(new JsonRepresentation(r).getJsonObject());
+			demande = new DemandeMoyen(new JsonRepresentation(r).getJsonObject());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InvalidJSONException e) {
 			e.printStackTrace();
 		}
 
-		return null;
+		return demande;
 	}
 @Override
 	public void deleteDemandeMoyen(DemandeMoyen dm) throws BadResponseException {
@@ -339,15 +334,15 @@ public class InterventionConnection implements InterventionApi {
 		Representation r = new JsonRepresentation(s.toJSON());
 
 		r= serv.putResource("intervention/" + interId + "/source", null, r);
-
+		Source source = null;
 		try {
-			return new Source(new JsonRepresentation(r).getJsonObject());
+			source= new Source(new JsonRepresentation(r).getJsonObject());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InvalidJSONException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return source;
 
 	}
 	@Override
@@ -428,9 +423,9 @@ public class InterventionConnection implements InterventionApi {
 		try {
 			JSONObject jobj = new JsonRepresentation(r).getJsonObject();
 			cible = new Cible(jobj);
-		} catch (InvalidJSONException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InvalidJSONException e) {
 			e.printStackTrace();
 		}
 		return cible;
@@ -512,15 +507,15 @@ public class InterventionConnection implements InterventionApi {
 		Representation r = new JsonRepresentation(a.toJSON());
 		
 		r = serv.putResource("intervention/" + interId + "/action", null, r);
-
+		Action action = null;
 		try {
-			return new Action(new JsonRepresentation(r).getJsonObject());
+			action= new Action(new JsonRepresentation(r).getJsonObject());
 		} catch (InvalidJSONException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return action;
 	}
 	@Override
 	public void deleteAction(Action a) throws BadResponseException {
@@ -596,15 +591,15 @@ public class InterventionConnection implements InterventionApi {
 	public Implique putImplique(Implique i) throws JSONException, BadResponseException {
 		Representation r = new JsonRepresentation(i.toJSON());
 		r = serv.putResource("intervention/" + interId + "/implique", null, r);
-
+		Implique implique = null;
 		try {
-			return new Implique(new JsonRepresentation(r).getJsonObject());
+			implique = new Implique(new JsonRepresentation(r).getJsonObject());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InvalidJSONException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return implique;
 	}
 	@Override
 	public void deleteImplique(Implique i) throws BadResponseException {
@@ -653,6 +648,4 @@ public class InterventionConnection implements InterventionApi {
 		return implique;
 
 	}
-
-
 }
