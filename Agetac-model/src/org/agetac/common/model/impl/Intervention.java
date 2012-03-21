@@ -24,7 +24,6 @@ public class Intervention extends AbstractModel {
 	private List<DemandeMoyen> demandes_moyen;
 
 
-
 	public Intervention() {
 		super(null, null, new Position(0, 0));
 		this.vehicules = new ArrayList<Vehicule>();
