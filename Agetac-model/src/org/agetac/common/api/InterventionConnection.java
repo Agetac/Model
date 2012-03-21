@@ -16,6 +16,7 @@ import org.agetac.common.model.impl.Source;
 import org.agetac.common.model.impl.Vehicule;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.restlet.ext.json.JsonRepresentation;
 import org.restlet.representation.Representation;
 
@@ -423,15 +424,16 @@ public class InterventionConnection implements InterventionApi {
 
 		Representation r = new JsonRepresentation(c.toJSON());
 		r = serv.putResource("intervention/" + interId + "/cible", null, r);
-
+		Cible cible = null;
 		try {
-			return new Cible(new JsonRepresentation(r).getJsonObject());
-		} catch (IOException e) {
-			e.printStackTrace();
+			JSONObject jobj = new JsonRepresentation(r).getJsonObject();
+			cible = new Cible(jobj);
 		} catch (InvalidJSONException e) {
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		return null;
+		return cible;
 
 	}
 	@Override
