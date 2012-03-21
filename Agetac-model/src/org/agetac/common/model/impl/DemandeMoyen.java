@@ -28,7 +28,7 @@ public class DemandeMoyen extends AbstractModel {
 	private HashMap<EtatDemande, String> groupesHoraires; 
 	private CategorieVehicule categorie;
 	
-	private String vehId = null; // l'id du vehicule r�sultat de la demande
+	private String vehId = null; // l'id du vehicule r�sultat de la demande
 	
 	public String getVehId() {
 		return vehId;
@@ -44,6 +44,7 @@ public class DemandeMoyen extends AbstractModel {
 		this.groupeID = "";
 		this.groupesHoraires = new HashMap<EtatDemande, String>();
 		this.categorie = null;
+		this.vehId = null;
 	}
 	
 	public DemandeMoyen(String uid, Position position, CategorieVehicule cat, EtatDemande etat, Groupe groupe, String heure) {
@@ -53,6 +54,7 @@ public class DemandeMoyen extends AbstractModel {
 		this.groupeID = groupe.getUniqueID();
 		this.groupesHoraires = new HashMap<EtatDemande, String>();
 		this.groupesHoraires.put(EtatDemande.LANCEE, heure);
+		this.vehId = null;
 	}
 	
 
@@ -62,6 +64,7 @@ public class DemandeMoyen extends AbstractModel {
 		this.etat = etat;
 		this.groupeID = groupeID;
 		this.groupesHoraires = new HashMap<EtatDemande, String>();
+		this.vehId = null;
 	}
 	
 	public DemandeMoyen(JSONObject json) throws InvalidJSONException {
@@ -71,6 +74,7 @@ public class DemandeMoyen extends AbstractModel {
 			this.etat = EtatDemande.valueOf(json.getString("etat"));
 			this.groupeID = json.getString("groupeID");
 			//TODO: Compléter avec la liste des groupe horaire
+			this.vehId = json.getString("vehId");
 			this.groupesHoraires = new HashMap<EtatDemande, String>();
 		}catch(JSONException e){
 			throw new InvalidJSONException(json.toString());
@@ -86,6 +90,7 @@ public class DemandeMoyen extends AbstractModel {
 
 		json.put("etat", this.etat.name());
 		json.put("groupeID", this.groupeID);
+		json.put("vehId", this.vehId);
 		json.put("categorie", this.categorie.name());
 		//TODO: Compléter avec la liste des groupe horaire
 		return json;
