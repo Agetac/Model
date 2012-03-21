@@ -90,4 +90,5 @@ public abstract class AbstractModel implements IJsonable, IModel {
 	public void setPosition(Position position) {
 		this.position = position;
 	}
+
 }

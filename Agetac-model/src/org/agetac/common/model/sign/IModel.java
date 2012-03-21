@@ -15,4 +15,5 @@ public interface IModel {
 	public void setName(String name);
 	
 	public void setPosition(Position position);
+	
 }

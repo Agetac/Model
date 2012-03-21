@@ -19,6 +19,10 @@ public class Position implements IJsonable {
 		this.longitude = longitude;
 		this.latitude = latitude;
 	}
+	public Position(Position p) {
+		this.longitude = p.getLongitude();
+		this.latitude = p.getLatitude();
+	}
 	
 	public Position(JSONObject json) throws InvalidJSONException{
 		try {
