@@ -37,13 +37,13 @@ public interface InterventionApi {
 	public void deleteSource(Source s) throws BadResponseException;
 
 	public Cible getCible(String cId) throws InvalidJSONException, BadResponseException;
-	public List<Cible> getCibles() throws BadResponseException, InvalidJSONException;
+	public List<Cible> getCibles() throws BadResponseException;
 	public Cible putCible(Cible c) throws JSONException, BadResponseException;
 	public Cible postCible(Cible c) throws JSONException, BadResponseException;
 	public void deleteCible(Cible c) throws BadResponseException;
 	
 	public Action getAction(String aId) throws InvalidJSONException, BadResponseException;
-	public List<Action> getActions() throws BadResponseException, InvalidJSONException;
+	public List<Action> getActions() throws BadResponseException;
 	public Action putAction(Action a) throws JSONException, BadResponseException;
 	public Action postAction(Action c) throws JSONException, BadResponseException;
 	public void deleteAction(Action a) throws BadResponseException;
