@@ -39,8 +39,8 @@ public class DemandeMoyen extends AbstractModel {
 	}
 
 	public DemandeMoyen() {
-		super("42","demande",new Position(0,0));
-		this.etat = null;
+		super(null,"demande",new Position(0,0));
+		this.etat = EtatDemande.LANCEE;
 		this.groupeID = "";
 		this.groupesHoraires = new HashMap<EtatDemande, String>();
 		this.categorie = null;

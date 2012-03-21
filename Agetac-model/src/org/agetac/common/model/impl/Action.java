@@ -19,7 +19,7 @@ public class Action extends AbstractModel {
 	private Position origin, aim;
 	
 	public Action() {
-		super("42",null,new Position(0,0));
+		super(null,null,new Position(0,0));
 		this.actionType = null;
 		this.origin = new Position(0,0);
 		this.aim = new Position(0,0);
