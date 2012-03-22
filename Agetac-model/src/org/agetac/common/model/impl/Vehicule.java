@@ -59,6 +59,23 @@ public class Vehicule extends AbstractModel {
 		this.groupesHoraires.put(EtatVehicule.DEMOBILISE, "");
 	}
 	
+	public Vehicule(String uid, Position position, CategorieVehicule cat, String caserneName, EtatVehicule etat, String groupeUID, String heure) {
+		super(uid, cat.name()+" "+caserneName, position);
+		this.categorie = cat;
+		this.caserneName = caserneName;
+		this.etat = etat;
+		this.groupeID = groupeUID;
+		this.groupesHoraires = new HashMap<EtatVehicule, String>();
+		this.groupesHoraires.put(EtatVehicule.DISPO_CASERNE, heure);
+		this.groupesHoraires.put(EtatVehicule.ALERTE, heure);
+		this.groupesHoraires.put(EtatVehicule.PARTIS, heure);
+		this.groupesHoraires.put(EtatVehicule.SUR_LES_LIEUX, "");
+		this.groupesHoraires.put(EtatVehicule.TRANSPORT_HOPITAL, "");
+		this.groupesHoraires.put(EtatVehicule.DISPO_RADIO, "");
+		this.groupesHoraires.put(EtatVehicule.TEMPS_DEPASSE, "");
+		this.groupesHoraires.put(EtatVehicule.DEMOBILISE, "");
+	}
+	
 
 	
 	public Vehicule(String uid, String nom, Position position, String caserneName, EtatVehicule etat, String groupeID) {

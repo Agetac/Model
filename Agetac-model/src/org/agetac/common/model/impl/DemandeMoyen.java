@@ -74,7 +74,7 @@ public class DemandeMoyen extends AbstractModel {
 			this.etat = EtatDemande.valueOf(json.getString("etat"));
 			this.groupeID = json.getString("groupeID");
 			//TODO: Compléter avec la liste des groupe horaire
-			this.vehId = json.getString("vehId");
+			//this.vehId = json.getString("vehId");
 			this.groupesHoraires = new HashMap<EtatDemande, String>();
 		}catch(JSONException e){
 			throw new InvalidJSONException(json.toString());
