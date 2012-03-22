@@ -5,42 +5,35 @@ import java.util.List;
 
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
-import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
 import org.agetac.common.model.sign.AbstractModel;
 
-@PersistenceCapable
+@PersistenceCapable(detachable = "false")
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 public class Intervention extends AbstractModel {
 
-	@Persistent(mappedBy = "intervention")
-	private List<Vehicule> vehicules;
+	@Persistent(mappedBy = "intervention", defaultFetchGroup = "true")
+	private List<Vehicule> vehicules = new ArrayList<Vehicule>();
 
-	@Persistent(mappedBy = "intervention")
-	private List<Cible> cibles;
+	@Persistent(mappedBy = "intervention", defaultFetchGroup = "true")
+	private List<Cible> cibles = new ArrayList<Cible>();
 
-	@Persistent(mappedBy = "intervention")
-	private List<Source> sources;
+	@Persistent(mappedBy = "intervention", defaultFetchGroup = "true")
+	private List<Source> sources = new ArrayList<Source>();
 
-	@Persistent(mappedBy = "intervention")
-	private List<Action> actions;
+	@Persistent(mappedBy = "intervention", defaultFetchGroup = "true")
+	private List<Action> actions = new ArrayList<Action>();
 
-	@Persistent(mappedBy = "intervention")
-	private List<Message> messages;
+	@Persistent(mappedBy = "intervention", defaultFetchGroup = "true")
+	private List<Message> messages = new ArrayList<Message>();
 
-	@Persistent(mappedBy = "intervention")
-	private List<Implique> impliques;
+	@Persistent(mappedBy = "intervention", defaultFetchGroup = "true")
+	private List<Implique> impliques = new ArrayList<Implique>();
 
 	public Intervention() {
 		super(null, new Position(0, 0));
-		this.vehicules = new ArrayList<Vehicule>();
-		this.cibles = new ArrayList<Cible>();
-		this.sources = new ArrayList<Source>();
-		this.actions = new ArrayList<Action>();
-		this.messages = new ArrayList<Message>();
-		this.impliques = new ArrayList<Implique>();
 	}
 
 	/*
@@ -48,10 +41,6 @@ public class Intervention extends AbstractModel {
 	 */
 	public List<Vehicule> getVehicules() {
 		return vehicules;
-	}
-
-	public void setVehicules(List<Vehicule> vehicules) {
-		this.vehicules = vehicules;
 	}
 
 	public List<Cible> getCibles() {
