@@ -1,21 +1,23 @@
 package org.agetac.model.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.agetac.common.exception.InvalidJSONException;
 import org.agetac.common.model.impl.Action;
+import org.agetac.common.model.impl.Action.ActionType;
 import org.agetac.common.model.impl.Cible;
+import org.agetac.common.model.impl.Cible.CibleType;
 import org.agetac.common.model.impl.Groupe;
 import org.agetac.common.model.impl.Implique;
 import org.agetac.common.model.impl.Intervention;
 import org.agetac.common.model.impl.Message;
 import org.agetac.common.model.impl.Position;
 import org.agetac.common.model.impl.Source;
+import org.agetac.common.model.impl.Source.SourceType;
 import org.agetac.common.model.impl.Vehicule;
-import org.agetac.common.model.impl.Action.ActionType;
 import org.agetac.common.model.impl.Vehicule.CategorieVehicule;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,13 +41,13 @@ public class InterventionTest {
 		inter1.setActions(actions);
 		
 		List<Cible> cibles = new ArrayList<Cible>();
-		cibles.add(new Cible("cib1", new Position(41.5454,42.5413)));
-		cibles.add(new Cible("cib2", new Position(41.5454,42.5413)));
+		cibles.add(new Cible("cib1", new Position(41.5454,42.5413), CibleType.WATER));
+		cibles.add(new Cible("cib2", new Position(41.5454,42.5413), CibleType.WATER));
 		inter1.setCibles(cibles);
 		
 		List<Source> sources = new ArrayList<Source>();
-		sources.add(new Source("sou1", new Position(41.5454,42.5413)));
-		sources.add(new Source("sou2", new Position(41.5454,42.5413)));
+		sources.add(new Source("sou1", new Position(41.5454,42.5413), SourceType.WATER));
+		sources.add(new Source("sou2", new Position(41.5454,42.5413), SourceType.WATER));
 		inter1.setSources(sources);
 		
 		List<Implique> impliques = new ArrayList<Implique>();
@@ -87,13 +89,13 @@ public class InterventionTest {
 		inter1.setActions(actions);
 		
 		List<Cible> cibles = new ArrayList<Cible>();
-		cibles.add(new Cible("cib1", new Position(41.5454,42.5413)));
-		cibles.add(new Cible("cib2", new Position(41.5454,42.5413)));
+		cibles.add(new Cible("cib1", new Position(41.5454,42.5413), CibleType.WATER));
+		cibles.add(new Cible("cib2", new Position(41.5454,42.5413), CibleType.WATER));
 		inter1.setCibles(cibles);
 		
 		List<Source> sources = new ArrayList<Source>();
-		sources.add(new Source("sou1", new Position(41.5454,42.5413)));
-		sources.add(new Source("sou2", new Position(41.5454,42.5413)));
+		sources.add(new Source("sou1", new Position(41.5454,42.5413), SourceType.WATER));
+		sources.add(new Source("sou2", new Position(41.5454,42.5413), SourceType.WATER));
 		inter1.setSources(sources);
 		
 		List<Implique> impliques = new ArrayList<Implique>();
