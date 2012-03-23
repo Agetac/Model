@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.agetac.common.exception.InvalidJSONException;
 import org.agetac.common.model.impl.Agent.Aptitude;
+import org.agetac.common.model.impl.Cible.CibleType;
 import org.agetac.common.model.sign.AbstractModel;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,6 +23,7 @@ public class Cible extends AbstractModel {
 	
 	public Cible() {
 		super(null,null,new Position(0,0));
+		this.type = CibleType.WATER;
 	}
 	
 	public Cible(String uid, Position position, CibleType type) {
@@ -39,6 +41,11 @@ public class Cible extends AbstractModel {
 		}
 	}
 	
+	public Cible(CibleType type) {
+		super(null,null,new Position(0,0));
+		this.type = type;
+	}
+
 	@Override
 	public JSONObject toJSON() throws JSONException{
 		JSONObject json = super.toJSON();
