@@ -191,7 +191,7 @@ public class InterventionConnection implements InterventionApi {
 			e.printStackTrace();
 		}
 
-		return null;
+		return vehicule;
 	}
 	@Override
 	public void deleteVehicule(Vehicule v) throws BadResponseException {
