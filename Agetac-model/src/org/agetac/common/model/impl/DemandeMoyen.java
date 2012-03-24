@@ -43,6 +43,9 @@ public class DemandeMoyen extends AbstractModel {
 		this.etat = EtatDemande.LANCEE;
 		this.groupeID = "0";
 		this.groupesHoraires = new HashMap<EtatDemande, String>();
+		this.groupesHoraires.put(EtatDemande.LANCEE, "");
+		this.groupesHoraires.put(EtatDemande.REFUSEE, "");
+		this.groupesHoraires.put(EtatDemande.ACCEPTEE, "");
 		this.categorie = null;
 		this.vehId = null;
 	}
@@ -54,6 +57,8 @@ public class DemandeMoyen extends AbstractModel {
 		this.groupeID = groupe.getUniqueID();
 		this.groupesHoraires = new HashMap<EtatDemande, String>();
 		this.groupesHoraires.put(EtatDemande.LANCEE, heure);
+		this.groupesHoraires.put(EtatDemande.REFUSEE, "");
+		this.groupesHoraires.put(EtatDemande.ACCEPTEE, "");
 		this.vehId = null;
 	}
 	

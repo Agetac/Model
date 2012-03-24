@@ -88,13 +88,13 @@ public class Vehicule extends AbstractModel {
 	
 	public Vehicule(JSONObject json) throws InvalidJSONException {
 		super(json);
-		try{
+		try {
 			this.categorie = CategorieVehicule.valueOf(json.getString("categorie"));
 			this.etat = EtatVehicule.valueOf(json.getString("etat"));
 			this.groupeID = json.getString("groupeID");
 			this.caserneName = json.getString("caserneName");
 			//TODO: Compléter avec la liste des groupe horaire
-		}catch(JSONException e){
+		} catch(JSONException e){
 			throw new InvalidJSONException(json.toString());
 		}
 	}
