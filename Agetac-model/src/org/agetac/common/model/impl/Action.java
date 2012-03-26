@@ -42,7 +42,7 @@ public class Action extends AbstractModel {
 
 	public String toString() {
 		try {
-			return this.toJSON().toString();
+			return this.toJSON().toString(4);
 		} catch (JSONException e) {
 			return "Error";
 		}
