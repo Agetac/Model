@@ -3,11 +3,14 @@ package org.agetac.common.client;
 import java.util.Collection;
 import java.util.Date;
 
+import org.agetac.common.dto.ActionDTO;
 import org.agetac.common.dto.InterventionDTO;
 import org.agetac.common.dto.MessageDTO;
 import org.agetac.common.dto.PositionDTO;
 import org.agetac.common.dto.SourceDTO;
 import org.agetac.common.dto.TargetDTO;
+import org.agetac.common.dto.VehicleDTO;
+import org.agetac.common.dto.VehicleDTO.VehicleState;
 import org.agetac.common.dto.VehicleDTO.VehicleType;
 import org.agetac.common.dto.VehicleDemandDTO;
 import org.agetac.common.dto.VehicleDemandDTO.DemandState;
@@ -33,9 +36,13 @@ public class Client {
 
 		playWithSources(c, interId);
 
+		playWithActions(c, interId);
+
 		playWithTargets(c, interId);
 
 		playWithVictims(c, interId);
+		
+		playWithVehicle(c, interId);
 		
 		testVehicleDemandListSizes(c, interId);
 
@@ -107,6 +114,29 @@ public class Client {
 		sources = c.getSources(interId);
 		System.out.println("Sources: " + sources.size());
 	}
+	
+	private static void playWithActions(AgetacClient c, long interId) {
+		// Add sources to intervention.
+		ActionDTO action = new ActionDTO();
+		c.addAction(interId, action);
+
+		// List sources.
+		Collection<ActionDTO> actions = c.getActions(interId);
+		System.out.println("Actions: " + actions.size());
+		
+		// TODO : size should be 1, not 0 ...
+
+		// Update the source we just added.
+		action.setPosition(new PositionDTO(0, 0));
+		c.updateAction(action);
+
+		// Delete the source.
+		c.deleteAction(action.getId());
+
+		// List sources.
+		actions = c.getActions(interId);
+		System.out.println("Actions: " + actions.size());
+	}
 
 	private static void playWithMessages(AgetacClient c, long interId) {
 		// Add messages to intervention.
@@ -134,6 +164,16 @@ public class Client {
 		Collection<VehicleDemandDTO> vehicleDemands = c
 				.getVehicleDemands(interId);
 		System.out.println("Vehicle demands: " + vehicleDemands.size());
+	}
+	
+	private static void playWithVehicle(AgetacClient c, long interId) {
+		// Add a vehicle demand.
+		VehicleDTO vehicle = new VehicleDTO("name", VehicleState.ALERTE, VehicleType.BEA, new PositionDTO(), null);
+		c.addVehicle(interId, vehicle);
+
+		// Print the number of vehicle demands for this intervention.
+		Collection<VehicleDTO> vehicles = c.getVehicles(interId);
+		System.out.println("Vehicles: " + vehicles.size());
 	}
 	
 	private static void testVehicleDemandListSizes(AgetacClient c, long interId) {
