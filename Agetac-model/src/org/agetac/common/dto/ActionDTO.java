@@ -16,6 +16,7 @@ public class ActionDTO implements IModel {
 		this.type = ActionType.FIRE;
 		this.position = new PositionDTO();
 		this.aim = new PositionDTO();
+		this.origin = new PositionDTO();
 	}
 	
 	public ActionDTO(String n, ActionType t, PositionDTO p, PositionDTO a) {

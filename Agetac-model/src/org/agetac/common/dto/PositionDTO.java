@@ -6,7 +6,10 @@ public class PositionDTO {
 	private double latitude = 0;
 	private double longitude = 0;
 	
-	public PositionDTO() {}
+	public PositionDTO() {
+		this.latitude = 0;
+		this.longitude = 0;
+	}
 	
 	public PositionDTO(double latitude, double longitude) {
 		this.latitude = latitude;
