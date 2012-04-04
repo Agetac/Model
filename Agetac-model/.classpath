@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="lib/org.json.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="lib/jdo/asm-3.3.jar"/>
-	<classpathentry kind="lib" path="lib/jdo/datanucleus-api-jdo-3.0.5.jar"/>
-	<classpathentry kind="lib" path="lib/jdo/datanucleus-core-3.0.6.jar"/>
-	<classpathentry kind="lib" path="lib/jdo/datanucleus-enhancer-3.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/jdo/jdo-api-3.1-SNAPSHOT-20110926.jar"/>
-	<classpathentry kind="lib" path="lib/restlet/org.restlet.ext.json.jar"/>
-	<classpathentry kind="lib" path="lib/restlet/org.restlet.jar"/>
-	<classpathentry kind="lib" path="lib/restlet/org.restlet.test.jar"/>
-	<classpathentry kind="lib" path="lib/jackson-core-asl-1.9.5.jar"/>
+	<classpathentry kind="lib" path="lib/org.codehaus.jackson.core.jar"/>
+	<classpathentry kind="lib" path="lib/org.codehaus.jackson.mapper.jar"/>
+	<classpathentry kind="lib" path="lib/org.restlet.ext.httpclient.jar"/>
+	<classpathentry kind="lib" path="lib/org.restlet.ext.jackson.jar"/>
+	<classpathentry kind="lib" path="lib/org.restlet.jar"/>
+	<classpathentry kind="lib" path="lib/org.apache.httpclient.jar"/>
+	<classpathentry kind="lib" path="lib/org.apache.httpcore.jar"/>
+	<classpathentry kind="lib" path="lib/org.apache.commons.logging.jar"/>
+	<classpathentry kind="lib" path="lib/org.restlet.ext.ssl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

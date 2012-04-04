@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<project name="Agetac-model" default="compile" basedir=".">
+<project name="Common" default="compile" basedir="../">
 
-	<property name="src.dir" location="src" />
+	<property name="src.dir" location="src/org/agetac/common" />
 	<property name="bin.dir" location="bin" />
 	<property name="lib.dir" location="lib" />
 
@@ -33,7 +33,6 @@
 		<taskdef name="datanucleusenhancer" classpathref="enhancer.classpath" classname="org.datanucleus.enhancer.tools.EnhancerTask" />
 
 		<datanucleusenhancer classpathref="enhancer.classpath" failonerror="true" verbose="true">
-			<jvmarg line="-Dlog4j.configuration=${log4j.config.file}" />
 			<fileset dir="${bin.dir}">
 				<include name="**/*.class" />
 			</fileset>
