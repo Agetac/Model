@@ -106,8 +106,7 @@ public class AgetacClient {
 			InterventionResource interventionResource = clientResource
 					.wrap(InterventionResource.class);
 
-			interventionResource.add(intervention);
-			return intervention;
+			return interventionResource.add(intervention);
 		} finally {
 			clientResource.release();
 		}

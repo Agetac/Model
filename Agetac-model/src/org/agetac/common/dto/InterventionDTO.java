@@ -71,4 +71,10 @@ public class InterventionDTO implements IModel {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	
+	public void setId(long id2) {
+		this.id= id2;
+		
+	}
 }

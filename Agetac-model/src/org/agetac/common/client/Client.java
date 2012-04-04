@@ -21,6 +21,9 @@ public class Client {
 		
 		// Create new intervention.
 		InterventionDTO intervention = c.createIntervention();
+		intervention = c.createIntervention();
+		
+		System.out.println("intervention id: " + intervention.getId());
 //		long interId = intervention.getId();
 //
 //		// How many do we have?
@@ -125,9 +128,10 @@ public class Client {
 
 	private static void playWithVehicleDemands(AgetacClient c, long interId) {
 		// Add a vehicle demand.
-		VehicleDemandDTO vehicleDemand = new VehicleDemandDTO(
-				DemandState.ASKED, VehicleType.VSAV, new PositionDTO(),
-				new Date());
+		VehicleDemandDTO vehicleDemand = new VehicleDemandDTO();
+		vehicleDemand.setPosition(new PositionDTO(42, 1664));
+		vehicleDemand.setState(DemandState.ASKED);
+		vehicleDemand.setType(VehicleType.BLS);
 		c.addVehicleDemand(interId, vehicleDemand);
 
 		// Print the number of vehicle demands for this intervention.

@@ -8,7 +8,7 @@ import org.restlet.resource.Post;
 public interface InterventionResource {
 
 	@Post
-	void add(InterventionDTO intervention);
+	InterventionDTO add(InterventionDTO intervention);
 
 	@Get
 	InterventionDTO retrieve();
