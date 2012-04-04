@@ -17,30 +17,30 @@ public class Client {
 
 	public static void main(String[] args) {
 
-		AgetacClient c = new AgetacClient("localhost", 8888);
+		AgetacClient c = new AgetacClient("148.60.14.119", 8888);
 		
 		// Create new intervention.
 		InterventionDTO intervention = c.createIntervention();
-		long interId = intervention.getId();
-
-		// How many do we have?
-		Collection<InterventionDTO> interventions = c.getInterventions();
-		System.out.println("Interventions: " + interventions.size());
-
-		playWithVehicleDemands(c, interId);
-
-		playWithMessages(c, interId);
-
-		playWithSources(c, interId);
-
-		playWithTargets(c, interId);
-
-		playWithVictims(c, interId);
-		
-		testVehicleDemandListSizes(c, interId);
-
-		intervention = c.getIntervention(intervention.getId());
-		System.out.println("Victims: " + intervention.getVictims().size());
+//		long interId = intervention.getId();
+//
+//		// How many do we have?
+//		Collection<InterventionDTO> interventions = c.getInterventions();
+//		System.out.println("Interventions: " + interventions.size());
+//
+//		playWithVehicleDemands(c, interId);
+//
+//		playWithMessages(c, interId);
+//
+//		playWithSources(c, interId);
+//
+//		playWithTargets(c, interId);
+//
+//		playWithVictims(c, interId);
+//		
+//		testVehicleDemandListSizes(c, interId);
+//
+//		intervention = c.getIntervention(intervention.getId());
+//		System.out.println("Victims: " + intervention.getVictims().size());
 	}
 
 	private static void playWithVictims(AgetacClient c, long interId) {
