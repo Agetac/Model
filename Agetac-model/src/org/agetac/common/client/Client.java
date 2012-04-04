@@ -20,10 +20,11 @@ public class Client {
 
 	public static void main(String[] args) {
 
-		AgetacClient c = new AgetacClient("localhost", 8888);
+		AgetacClient c = new AgetacClient("148.60.14.142", 8888);
 		
 		// Create new intervention.
 		InterventionDTO intervention = c.createIntervention();
+
 		long interId = intervention.getId();
 
 		// How many do we have?
@@ -48,6 +49,7 @@ public class Client {
 
 		intervention = c.getIntervention(intervention.getId());
 		System.out.println("Victims: " + intervention.getVictims().size());
+
 	}
 
 	private static void playWithVictims(AgetacClient c, long interId) {

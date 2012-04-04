@@ -11,9 +11,13 @@ public class TargetDTO implements IModel {
 	private PositionDTO position;
 	private String name = "";
 	
-	public TargetDTO() {}
+	public TargetDTO() {
+		this.position = new PositionDTO();
+		this.type = TargetType.WATER;
+	}
 	
 	public TargetDTO(TargetType type) {
+		this.type = type;
 		this.position = new PositionDTO();
 	}
 	
