@@ -24,6 +24,31 @@ public class Client {
 		
 		// Create new intervention.
 		InterventionDTO intervention = c.createIntervention();
+<<<<<<< HEAD
+		intervention = c.createIntervention();
+		
+		System.out.println("intervention id: " + intervention.getId());
+//		long interId = intervention.getId();
+//
+//		// How many do we have?
+//		Collection<InterventionDTO> interventions = c.getInterventions();
+//		System.out.println("Interventions: " + interventions.size());
+//
+//		playWithVehicleDemands(c, interId);
+//
+//		playWithMessages(c, interId);
+//
+//		playWithSources(c, interId);
+//
+//		playWithTargets(c, interId);
+//
+//		playWithVictims(c, interId);
+//		
+//		testVehicleDemandListSizes(c, interId);
+//
+//		intervention = c.getIntervention(intervention.getId());
+//		System.out.println("Victims: " + intervention.getVictims().size());
+=======
 
 		long interId = intervention.getId();
 
@@ -50,6 +75,7 @@ public class Client {
 		intervention = c.getIntervention(intervention.getId());
 		System.out.println("Victims: " + intervention.getVictims().size());
 
+>>>>>>> 222d0856eff08ad143da68424066f301f808e155
 	}
 
 	private static void playWithVictims(AgetacClient c, long interId) {

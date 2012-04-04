@@ -4,6 +4,7 @@ public class BarrackDTO implements IModel {
 
 	private long id;
 	private String name;
+	private PositionDTO position;
 	
 	public BarrackDTO() {}
 	
@@ -17,8 +18,7 @@ public class BarrackDTO implements IModel {
 
 	@Override
 	public PositionDTO getPosition() {
-		// TODO Auto-generated method stub
-		return null;
+		return position;
 	}
 
 	public String getName() {
@@ -31,7 +31,7 @@ public class BarrackDTO implements IModel {
 
 	@Override
 	public void setPosition(PositionDTO p) {
-		// TODO Auto-generated method stub
+		this.position = p;
 		
 	}
 	

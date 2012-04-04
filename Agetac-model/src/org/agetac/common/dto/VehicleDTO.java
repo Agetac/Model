@@ -84,13 +84,6 @@ public class VehicleDTO implements IModel {
 		this.barrack = barrack;
 	}
 	
-	public String getBarrackName() {
-		if (barrack != null) {
-			return barrack.getName();
-		}
-		return null;
-	}
-
 	public GroupDTO getGroup() {
 		return group;
 	}

@@ -3,7 +3,6 @@ package org.agetac.common.dto;
 import java.util.Date;
 
 import org.agetac.common.dto.VehicleDTO.VehicleType;
-import org.agetac.common.dto.VehicleDemandDTO.DemandState;
 
 public class VehicleDemandDTO implements IModel {
 
