@@ -32,4 +32,8 @@ public class MessageDTO {
 	public void setDate(String date) {
 		this.date = date;
 	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 }

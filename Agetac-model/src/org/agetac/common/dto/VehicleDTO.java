@@ -91,5 +91,9 @@ public class VehicleDTO implements IModel {
 	public void setGroup(GroupDTO group) {
 		this.group = group;
 	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 	
 }

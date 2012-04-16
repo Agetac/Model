@@ -77,5 +77,9 @@ public class ActionDTO implements IModel {
 	public void setOrigin(PositionDTO origin) {
 		this.origin = origin;
 	}
+
+	public void setId(long id) {
+		this.id = id;		
+	}
 	
 }
