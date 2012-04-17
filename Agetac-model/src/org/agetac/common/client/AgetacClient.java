@@ -336,6 +336,17 @@ public class AgetacClient {
 		}
 
 	}
+	
+	public void updateVehicleDemand(VehicleDemandDTO vd) {
+		ClientResource clientResource = makeClientResource(getBaseAddress()	+ "/vehicleDemand/" + vd.getId());
+		try {
+			VehicleDemandResource resource = clientResource.wrap(VehicleDemandResource.class);
+
+			resource.update(vd);
+		} finally {
+			clientResource.release();
+		}
+	}
 
 	public void deleteTarget(long id) {
 		ClientResource clientResource = makeClientResource(getBaseAddress()
@@ -422,5 +433,4 @@ public class AgetacClient {
 			clientResource.release();
 		}
 	}
-
 }

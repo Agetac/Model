@@ -31,25 +31,21 @@ public class Client {
 		Collection<InterventionDTO> interventions = c.getInterventions();
 		System.out.println("Interventions: " + interventions.size());
 
-		playWithVehicleDemands(c, interId);
-
-		playWithMessages(c, interId);
-
-		playWithSources(c, interId);
-
-		playWithActions(c, interId);
-
-		playWithTargets(c, interId);
-
-		playWithVictims(c, interId);
-		
-		playWithVehicle(c, interId);
-		
-		testVehicleDemandListSizes(c, interId);
-
-		intervention = c.getIntervention(intervention.getId());
-		System.out.println("Victims: " + intervention.getVictims().size());
-
+//		playWithVehicleDemands(c, interId);
+//
+//		playWithMessages(c, interId);
+//
+//		playWithSources(c, interId);
+//
+//		playWithActions(c, interId);
+//
+//		playWithTargets(c, interId);
+//
+//		playWithVictims(c, interId);
+//		
+//		playWithVehicle(c, interId);
+//		
+//		testVehicleDemandListSizes(c, interId);
 	}
 
 	private static void playWithVictims(AgetacClient c, long interId) {
@@ -158,7 +154,7 @@ public class Client {
 	private static void playWithVehicleDemands(AgetacClient c, long interId) {
 		// Add a vehicle demand.
 		VehicleDemandDTO vehicleDemand = new VehicleDemandDTO();
-		vehicleDemand.setPosition(new PositionDTO(42, 1664));
+		vehicleDemand.setPosition(new PositionDTO(4.8114974E7, -1637923.0));
 		vehicleDemand.setState(DemandState.ASKED);
 		vehicleDemand.setType(VehicleType.BLS);
 		c.addVehicleDemand(interId, vehicleDemand);
