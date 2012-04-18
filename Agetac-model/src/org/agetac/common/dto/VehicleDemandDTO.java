@@ -19,14 +19,12 @@ public class VehicleDemandDTO implements IModel {
 	/** default vehicle id associated with the demand is unknown (-1)*/
 	private int vehicleId = -1;
 	
-	public VehicleDemandDTO() {
-		this.position = new PositionDTO();
-	}
+	public VehicleDemandDTO() {}
 	
 	public VehicleDemandDTO(DemandState s, VehicleType t, PositionDTO p, Date date) {
 		this.state = s;
 		this.type = t;
-		this.position = new PositionDTO();
+		this.position = p;
 		this.timestamp = date;
 	}
 	

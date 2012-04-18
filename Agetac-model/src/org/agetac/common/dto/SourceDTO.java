@@ -12,12 +12,11 @@ public class SourceDTO implements IModel {
 	private long id;
 	
 	public SourceDTO() {
-		this.position = new PositionDTO();
+		this.type = SourceType.FIRE;
 	}
 	
 	public SourceDTO(SourceType type) {
 		this.type = type;
-		this.position = new PositionDTO();
 	}
 	
 	public SourceDTO(String name, SourceType type, PositionDTO p) {

@@ -12,7 +12,6 @@ public class VictimDTO implements IModel {
 
 	public VictimDTO(String name) {
 		this.name = name;
-		this.position = new PositionDTO();
 	}
 	
 	public long getId() {

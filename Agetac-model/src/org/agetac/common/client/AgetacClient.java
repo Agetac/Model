@@ -338,7 +338,7 @@ public class AgetacClient {
 	}
 	
 	public void updateVehicleDemand(VehicleDemandDTO vd) {
-		ClientResource clientResource = makeClientResource(getBaseAddress()	+ "/vehicleDemand/" + vd.getId());
+		ClientResource clientResource = makeClientResource(getBaseAddress()	+ "/vehicledemand/" + vd.getId());
 		try {
 			VehicleDemandResource resource = clientResource.wrap(VehicleDemandResource.class);
 

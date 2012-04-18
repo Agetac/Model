@@ -31,21 +31,19 @@ public class Client {
 		Collection<InterventionDTO> interventions = c.getInterventions();
 		System.out.println("Interventions: " + interventions.size());
 
-//		playWithVehicleDemands(c, interId);
-//
-//		playWithMessages(c, interId);
-//
-//		playWithSources(c, interId);
-//
-//		playWithActions(c, interId);
-//
-//		playWithTargets(c, interId);
-//
-//		playWithVictims(c, interId);
-//		
-//		playWithVehicle(c, interId);
-//		
-//		testVehicleDemandListSizes(c, interId);
+		playWithVehicleDemands(c, interId);
+
+		playWithMessages(c, interId);
+
+		playWithSources(c, interId);
+
+		playWithActions(c, interId);
+
+		playWithTargets(c, interId);
+
+		playWithVictims(c, interId);
+		
+		playWithVehicle(c, interId);
 	}
 
 	private static void playWithVictims(AgetacClient c, long interId) {
@@ -153,16 +151,23 @@ public class Client {
 
 	private static void playWithVehicleDemands(AgetacClient c, long interId) {
 		// Add a vehicle demand.
-		VehicleDemandDTO vehicleDemand = new VehicleDemandDTO();
-		vehicleDemand.setPosition(new PositionDTO(4.8114974E7, -1637923.0));
-		vehicleDemand.setState(DemandState.ASKED);
-		vehicleDemand.setType(VehicleType.BLS);
-		c.addVehicleDemand(interId, vehicleDemand);
+		VehicleDemandDTO vd = new VehicleDemandDTO();
+		vd.setState(DemandState.ASKED);
+		vd.setType(VehicleType.BLS);
+		vd.setName("Foo");
+		vd.setTimestamp(new Date());
+		c.addVehicleDemand(interId, vd);
 
 		// Print the number of vehicle demands for this intervention.
 		Collection<VehicleDemandDTO> vehicleDemands = c
 				.getVehicleDemands(interId);
 		System.out.println("Vehicle demands: " + vehicleDemands.size());
+		
+		System.out.println("la demande: "+c.getVehicleDemands(0).toArray()[0].toString());
+		
+		vd.setName("bar");
+		c.updateVehicleDemand(vd);
+		System.out.println("la demande: "+c.getVehicleDemands(0).toArray()[0].toString());
 	}
 	
 	private static void playWithVehicle(AgetacClient c, long interId) {
@@ -173,17 +178,5 @@ public class Client {
 		// Print the number of vehicle demands for this intervention.
 		Collection<VehicleDTO> vehicles = c.getVehicles(interId);
 		System.out.println("Vehicles: " + vehicles.size());
-	}
-	
-	private static void testVehicleDemandListSizes(AgetacClient c, long interId) {
-		InterventionDTO i = c.getIntervention(interId);
-		
-		VehicleDemandDTO vd = new VehicleDemandDTO();
-		c.addVehicleDemand(interId, vd);
-		
-		Collection<VehicleDemandDTO> vListFromInter = i.getDemands();
-		Collection<VehicleDemandDTO> vListFromClient = c.getVehicleDemands(interId);
-		
-		assert (vListFromInter.size() != vListFromClient.size());
 	}
 }

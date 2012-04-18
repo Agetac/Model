@@ -8,7 +8,6 @@ public class GroupDTO implements IModel {
 	
 
 	public GroupDTO() {
-		this.position = new PositionDTO();
 	}
 	
 	public GroupDTO(String name, PositionDTO position) {

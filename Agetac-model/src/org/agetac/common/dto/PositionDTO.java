@@ -3,13 +3,11 @@ package org.agetac.common.dto;
 public class PositionDTO {
 
 	private long id;
-	private double latitude = 0;
-	private double longitude = 0;
+	private double latitude;
+	private double longitude;
+	private boolean isKnown = false;
 	
-	public PositionDTO() {
-		this.latitude = 0;
-		this.longitude = 0;
-	}
+	public PositionDTO() {}
 	
 	public PositionDTO(double latitude, double longitude) {
 		this.latitude = latitude;
@@ -17,8 +15,10 @@ public class PositionDTO {
 	}
 	
 	public PositionDTO(PositionDTO p) {
-		this.latitude = p.getLatitude();
-		this.longitude = p.getLongitude();
+		if (p != null) {
+			this.latitude = p.getLatitude();
+			this.longitude = p.getLongitude();
+		}
 	}
 
 	public long getId() {
@@ -40,5 +40,12 @@ public class PositionDTO {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	
+
+	public boolean isKnown() {
+		return isKnown;
+	}
+
+	public void setKnown(boolean isKnown) {
+		this.isKnown = isKnown;
+	}
 }
