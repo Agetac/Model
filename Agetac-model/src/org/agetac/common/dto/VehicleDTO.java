@@ -1,5 +1,9 @@
 package org.agetac.common.dto;
 
+import java.util.Observer;
+
+import org.agetac.common.observer.MyObservable;
+
 
 public class VehicleDTO implements IModel {
 
@@ -23,6 +27,8 @@ public class VehicleDTO implements IModel {
 	private BarrackDTO barrack;
 	private GroupDTO group;
 	
+	private MyObservable observable = new MyObservable();
+	
 	public VehicleDTO() {}
 	
 	public VehicleDTO(String n, VehicleState s, VehicleType t, PositionDTO p, BarrackDTO b) {
@@ -31,6 +37,8 @@ public class VehicleDTO implements IModel {
 		this.type = t;
 		this.position = p;
 		this.barrack = b;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 	
 	public VehicleDTO(PositionDTO p, VehicleType t, String barrack, VehicleState s, GroupDTO g, String string) {
@@ -38,6 +46,8 @@ public class VehicleDTO implements IModel {
 		this.type = t;
 		this.state = s;
 		this.group = g;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	public long getId() {
@@ -50,6 +60,8 @@ public class VehicleDTO implements IModel {
 
 	public void setName(String name) {
 		this.name = name;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	public VehicleState getState() {
@@ -58,6 +70,8 @@ public class VehicleDTO implements IModel {
 
 	public void setState(VehicleState state) {
 		this.state = state;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	public VehicleType getType() {
@@ -66,6 +80,8 @@ public class VehicleDTO implements IModel {
 
 	public void setType(VehicleType type) {
 		this.type = type;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	public PositionDTO getPosition() {
@@ -74,6 +90,8 @@ public class VehicleDTO implements IModel {
 
 	public void setPosition(PositionDTO position) {
 		this.position = position;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	public BarrackDTO getBarrack() {
@@ -82,6 +100,8 @@ public class VehicleDTO implements IModel {
 
 	public void setBarrack(BarrackDTO barrack) {
 		this.barrack = barrack;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 	
 	public GroupDTO getGroup() {
@@ -90,10 +110,19 @@ public class VehicleDTO implements IModel {
 
 	public void setGroup(GroupDTO group) {
 		this.group = group;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	public void setId(long id) {
 		this.id = id;
+		observable.setChanged();
+		observable.notifyObservers(this);
+	}
+
+	@Override
+	public void addObserver(Observer obs) {
+		observable.addObserver(obs);
 	}
 	
 }

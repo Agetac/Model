@@ -1,8 +1,10 @@
 package org.agetac.common.dto;
 
 import java.util.Date;
+import java.util.Observer;
 
 import org.agetac.common.dto.VehicleDTO.VehicleType;
+import org.agetac.common.observer.MyObservable;
 
 public class VehicleDemandDTO implements IModel {
 
@@ -19,6 +21,8 @@ public class VehicleDemandDTO implements IModel {
 	/** default vehicle id associated with the demand is unknown (-1)*/
 	private int vehicleId = -1;
 	
+	private MyObservable observable = new MyObservable();
+	
 	public VehicleDemandDTO() {}
 	
 	public VehicleDemandDTO(DemandState s, VehicleType t, PositionDTO p, Date date) {
@@ -33,6 +37,8 @@ public class VehicleDemandDTO implements IModel {
 		this.position = p;
 		this.state = s;
 		this.group = g;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	public long getId() {
@@ -45,6 +51,8 @@ public class VehicleDemandDTO implements IModel {
 
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	public DemandState getState() {
@@ -53,6 +61,8 @@ public class VehicleDemandDTO implements IModel {
 
 	public void setState(DemandState state) {
 		this.state = state;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	public PositionDTO getPosition() {
@@ -61,6 +71,8 @@ public class VehicleDemandDTO implements IModel {
 
 	public void setPosition(PositionDTO position) {
 		this.position = position;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	public VehicleType getType() {
@@ -69,6 +81,8 @@ public class VehicleDemandDTO implements IModel {
 
 	public void setType(VehicleType type) {
 		this.type = type;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	public int getVehicleId() {
@@ -77,6 +91,8 @@ public class VehicleDemandDTO implements IModel {
 
 	public void setVehicleId(int vehicleId) {
 		this.vehicleId = vehicleId;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	@Override
@@ -87,6 +103,8 @@ public class VehicleDemandDTO implements IModel {
 	@Override
 	public void setName(String name) {
 		this.name = name;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	public GroupDTO getGroup() {
@@ -95,9 +113,18 @@ public class VehicleDemandDTO implements IModel {
 
 	public void setGroup(GroupDTO group) {
 		this.group = group;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	public void setId(long id) {
 		this.id = id;
+		observable.setChanged();
+		observable.notifyObservers(this);
+	}
+
+	@Override
+	public void addObserver(Observer obs) {
+		observable.addObserver(obs);
 	}
 }

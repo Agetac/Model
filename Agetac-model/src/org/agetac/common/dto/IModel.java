@@ -1,6 +1,8 @@
 package org.agetac.common.dto;
 
-public interface IModel {
+import java.util.Observer;
+
+public interface IModel{
 
 	public long getId();
 	
@@ -11,4 +13,6 @@ public interface IModel {
 	public String getName();
 	
 	public void setName(String name);
+	
+	public void addObserver(Observer obs);
 }

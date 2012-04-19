@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.agetac.common.dto.ActionDTO;
+import org.agetac.common.dto.ActionDTO.ActionType;
 import org.agetac.common.dto.InterventionDTO;
 import org.agetac.common.dto.MessageDTO;
 import org.agetac.common.dto.PositionDTO;
@@ -25,25 +26,25 @@ public class Client {
 		// Create new intervention.
 		InterventionDTO intervention = c.createIntervention();
 
-		long interId = intervention.getId();
-
-		// How many do we have?
-		Collection<InterventionDTO> interventions = c.getInterventions();
-		System.out.println("Interventions: " + interventions.size());
-
-		playWithVehicleDemands(c, interId);
-
-		playWithMessages(c, interId);
-
-		playWithSources(c, interId);
-
-		playWithActions(c, interId);
-
-		playWithTargets(c, interId);
-
-		playWithVictims(c, interId);
-		
-		playWithVehicle(c, interId);
+//		long interId = intervention.getId();
+//
+//		// How many do we have?
+//		Collection<InterventionDTO> interventions = c.getInterventions();
+//		System.out.println("Interventions: " + interventions.size());
+//
+//		playWithVehicleDemands(c, interId);
+//
+//		playWithMessages(c, interId);
+//
+//		playWithSources(c, interId);
+//
+//		playWithActions(c, interId);
+//
+//		playWithTargets(c, interId);
+//
+//		playWithVictims(c, interId);
+//		
+//		playWithVehicle(c, interId);
 	}
 
 	private static void playWithVictims(AgetacClient c, long interId) {
@@ -113,7 +114,7 @@ public class Client {
 	
 	private static void playWithActions(AgetacClient c, long interId) {
 		// Add sources to intervention.
-		ActionDTO action = new ActionDTO();
+		ActionDTO action = new ActionDTO(ActionType.HUMAN);
 		c.addAction(interId, action);
 
 		// List sources.

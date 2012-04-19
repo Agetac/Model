@@ -2,6 +2,9 @@ package org.agetac.common.dto;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Observer;
+
+import org.agetac.common.observer.MyObservable;
 
 public class InterventionDTO implements IModel {
 
@@ -15,6 +18,8 @@ public class InterventionDTO implements IModel {
 	private Collection<VehicleDemandDTO> demands = new ArrayList<VehicleDemandDTO>();
 	private PositionDTO position;
 	private String name;
+	
+	private MyObservable observable = new MyObservable();
 	
 	public InterventionDTO() {
 		this.position = new PositionDTO();
@@ -76,5 +81,10 @@ public class InterventionDTO implements IModel {
 	public void setId(long id2) {
 		this.id= id2;
 		
+	}
+
+	@Override
+	public void addObserver(Observer obs) {
+		observable.addObserver(obs);
 	}
 }

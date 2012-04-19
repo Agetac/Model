@@ -1,5 +1,9 @@
 package org.agetac.common.dto;
 
+import java.util.Observer;
+
+import org.agetac.common.observer.MyObservable;
+
 
 public class SourceDTO implements IModel {
 
@@ -8,6 +12,8 @@ public class SourceDTO implements IModel {
 	private SourceType type;
 	private PositionDTO position;
 	private String name = "";
+	
+	private MyObservable observable = new MyObservable();
 	
 	private long id;
 	
@@ -60,6 +66,11 @@ public class SourceDTO implements IModel {
 	
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	@Override
+	public void addObserver(Observer obs) {
+		observable.addObserver(obs);
 	}
 	
 }

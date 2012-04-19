@@ -1,5 +1,9 @@
 package org.agetac.common.dto;
 
+import java.util.Observer;
+
+import org.agetac.common.observer.MyObservable;
+
 
 public class ActionDTO implements IModel {
 
@@ -12,8 +16,12 @@ public class ActionDTO implements IModel {
 	private PositionDTO origin;
 	private PositionDTO aim;
 	
-	public ActionDTO() {
-		this.type = ActionType.FIRE;
+	private MyObservable observable = new MyObservable();
+	
+	public ActionDTO() {}
+	
+	public ActionDTO(ActionType type) {
+		this.type = type;
 	}
 	
 	public ActionDTO(String n, ActionType t, PositionDTO p, PositionDTO a) {
@@ -76,6 +84,11 @@ public class ActionDTO implements IModel {
 
 	public void setId(long id) {
 		this.id = id;		
+	}
+
+	@Override
+	public void addObserver(Observer obs) {
+		observable.addObserver(obs);
 	}
 	
 }

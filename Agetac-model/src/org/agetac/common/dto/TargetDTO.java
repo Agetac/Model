@@ -1,5 +1,9 @@
 package org.agetac.common.dto;
 
+import java.util.Observer;
+
+import org.agetac.common.observer.MyObservable;
+
 
 public class TargetDTO implements IModel {
 
@@ -10,6 +14,8 @@ public class TargetDTO implements IModel {
 	private TargetType type;
 	private PositionDTO position;
 	private String name = "";
+	
+	private MyObservable observable = new MyObservable();
 	
 	public TargetDTO() {
 		this.type = TargetType.WATER;
@@ -60,5 +66,10 @@ public class TargetDTO implements IModel {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	@Override
+	public void addObserver(Observer obs) {
+		observable.addObserver(obs);
 	}
 }
