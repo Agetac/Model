@@ -25,6 +25,8 @@ public class Client {
 		
 		// Create new intervention.
 		InterventionDTO intervention = c.createIntervention();
+		intervention.setPosition(new PositionDTO(48115436 ,-1638084));
+		c.updateIntervention(intervention);
 
 //		long interId = intervention.getId();
 //

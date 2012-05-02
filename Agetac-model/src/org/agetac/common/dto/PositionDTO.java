@@ -3,13 +3,13 @@ package org.agetac.common.dto;
 public class PositionDTO {
 
 	private long id;
-	private double latitude;
-	private double longitude;
+	private int latitude;
+	private int longitude;
 	private boolean isKnown = false;
 	
 	public PositionDTO() {}
 	
-	public PositionDTO(double latitude, double longitude) {
+	public PositionDTO(int latitude, int longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
@@ -25,19 +25,19 @@ public class PositionDTO {
 		return id;
 	}
 	
-	public double getLatitude() {
+	public int getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(double latitude) {
+	public void setLatitude(int latitude) {
 		this.latitude = latitude;
 	}
 
-	public double getLongitude() {
+	public int getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(double longitude) {
+	public void setLongitude(int longitude) {
 		this.longitude = longitude;
 	}
 

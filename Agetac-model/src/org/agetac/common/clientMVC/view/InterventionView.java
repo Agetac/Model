@@ -106,8 +106,8 @@ public class InterventionView extends JFrame {
 	public PositionDTO getPosition() {
 		String lat = txtLatitude.getText();
 		String longi = txtLongitude.getText();
-		PositionDTO pos = new PositionDTO(Double.parseDouble(lat),
-				Double.parseDouble(longi));
+		PositionDTO pos = new PositionDTO(Integer.parseInt(lat),
+				Integer.parseInt(longi));
 		return pos;
 	}
 

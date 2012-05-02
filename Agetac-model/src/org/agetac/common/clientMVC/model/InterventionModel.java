@@ -11,8 +11,10 @@ import org.agetac.common.dto.InterventionDTO;
 public class InterventionModel extends AbstractTableModel {
 
 	private List<InterventionDTO> interventions;
-	private final String[] entetes = { "ID", "Position", "Vehicles", "Targets",
-			"Sources", "Actions", "Messages", "Victims" };
+	private final String[] entetes = {
+			"ID", "Position", "Vehicles", "Targets",
+			"Sources", "Actions", "Messages", "Victims"};
+	
 	private AgetacClient client;
 	
 

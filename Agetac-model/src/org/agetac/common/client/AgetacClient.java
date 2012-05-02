@@ -433,4 +433,15 @@ public class AgetacClient {
 			clientResource.release();
 		}
 	}
+
+	public void updateIntervention(InterventionDTO intervention) {
+		ClientResource clientResource = makeClientResource(getBaseAddress()	+ "/intervention/" + intervention.getId());
+		try {
+			InterventionResource resource = clientResource.wrap(InterventionResource.class);
+
+			resource.update(intervention);
+		} finally {
+			clientResource.release();
+		}
+	}
 }
