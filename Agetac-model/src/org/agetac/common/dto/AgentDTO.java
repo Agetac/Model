@@ -9,6 +9,9 @@ public class AgentDTO implements IModel {
 	private long id;
 	private MyObservable observable = new MyObservable();
 	
+	private PositionDTO position = new PositionDTO();
+	private String name = "agent";
+	
 	public long getId() {
 		return id;
 	}
@@ -16,29 +19,25 @@ public class AgentDTO implements IModel {
 
 	@Override
 	public PositionDTO getPosition() {
-		// TODO Auto-generated method stub
-		return null;
+		return position;
 	}
 
 
 	@Override
 	public void setPosition(PositionDTO p) {
-		// TODO Auto-generated method stub
-		
+		this.position = p;
 	}
 
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
 
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
+		this.name = name;
 	}
 
 
