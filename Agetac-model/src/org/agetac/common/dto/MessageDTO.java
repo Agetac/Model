@@ -1,14 +1,16 @@
 package org.agetac.common.dto;
 
+import java.util.Date;
+
 public class MessageDTO {
 	
 	private long id;
 	private String text;
-	private String date;
+	private Date date;
 	
 	public MessageDTO() {}
 	
-	public MessageDTO(String message, String date) {
+	public MessageDTO(String message, Date date) {
 		this.text = message;
 		this.date = date;
 	}
@@ -25,11 +27,11 @@ public class MessageDTO {
 		this.text = text;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
