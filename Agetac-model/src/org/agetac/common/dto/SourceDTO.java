@@ -7,6 +7,8 @@ import org.agetac.common.observer.MyObservable;
 
 public class SourceDTO implements IModel {
 
+	private long id;
+	
 	public enum SourceType {WATER, FIRE, CHEM}
 	
 	private SourceType type;
@@ -15,14 +17,20 @@ public class SourceDTO implements IModel {
 	
 	private MyObservable observable = new MyObservable();
 	
-	private long id;
-	
 	public SourceDTO() {
 		this.type = SourceType.FIRE;
 	}
 	
 	public SourceDTO(SourceType type) {
 		this.type = type;
+	}
+	
+	public long getId() {
+		return id;
+	}
+	
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 	public SourceDTO(String name, SourceType type, PositionDTO p) {
@@ -60,17 +68,8 @@ public class SourceDTO implements IModel {
 		this.name = name;
 	}
 
-	public long getId() {
-		return id;
-	}
-	
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	@Override
 	public void addObserver(Observer obs) {
 		observable.addObserver(obs);
 	}
-	
 }

@@ -29,6 +29,10 @@ public class TargetDTO implements IModel {
 		return id;
 	}
 	
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 	public TargetDTO(String name, TargetType type, PositionDTO p) {
 		this.name = name;
 		this.type = type;
@@ -62,10 +66,6 @@ public class TargetDTO implements IModel {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	@Override
