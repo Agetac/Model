@@ -1,5 +1,6 @@
 package org.agetac.common.client;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import org.agetac.common.dto.ActionDTO;
@@ -13,7 +14,6 @@ import org.agetac.common.dto.VictimDTO;
 import org.agetac.common.resources.ActionResource;
 import org.agetac.common.resources.ActionsResource;
 import org.agetac.common.resources.InterventionResource;
-import org.agetac.common.resources.InterventionsResource;
 import org.agetac.common.resources.MessageResource;
 import org.agetac.common.resources.MessagesResource;
 import org.agetac.common.resources.SourceResource;
@@ -26,6 +26,11 @@ import org.agetac.common.resources.VehicleResource;
 import org.agetac.common.resources.VehiclesResource;
 import org.agetac.common.resources.VictimResource;
 import org.agetac.common.resources.VictimsResource;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
+import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
 public class AgetacClient {
@@ -51,10 +56,19 @@ public class AgetacClient {
 		ClientResource clientResource = makeClientResource(getBaseAddress()
 				+ "/intervention/" + interId + "/vehicledemands");
 		try {
-			VehicleDemandsResource vehicleDemandsResource = clientResource
-					.wrap(VehicleDemandsResource.class);
+			Representation repr = clientResource.get();
 
-			return vehicleDemandsResource.retrieve();
+			TypeReference<Collection<VehicleDemandDTO>> tr = new TypeReference<Collection<VehicleDemandDTO>>() {
+			};
+			ObjectMapper mapper = new ObjectMapper();
+			Collection<VehicleDemandDTO> col = null;
+			try {
+				col = mapper.readValue(repr.getStream(), tr);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return col;
 		} finally {
 			clientResource.release();
 		}
@@ -75,10 +89,10 @@ public class AgetacClient {
 		}
 
 	}
-	
 
 	public VehicleDTO addVehicle(long interId, VehicleDTO vehicle) {
-		ClientResource clientResource = makeClientResource(getBaseAddress()	+ "/intervention/" + interId + "/vehicle");
+		ClientResource clientResource = makeClientResource(getBaseAddress()
+				+ "/intervention/" + interId + "/vehicle");
 		try {
 			VehicleResource vehicleResource = clientResource
 					.wrap(VehicleResource.class);
@@ -93,10 +107,20 @@ public class AgetacClient {
 		ClientResource clientResource = makeClientResource(getBaseAddress()
 				+ "/interventions");
 		try {
-			InterventionsResource interventionsResource = clientResource
-					.wrap(InterventionsResource.class);
+			Representation repr = clientResource.get();
 
-			return interventionsResource.retrieve();
+			TypeReference<Collection<InterventionDTO>> tr = new TypeReference<Collection<InterventionDTO>>() {
+			};
+			ObjectMapper mapper = new ObjectMapper();
+			Collection<InterventionDTO> col = null;
+			try {
+				col = mapper.readValue(repr.getStream(), tr);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return col;
+
 		} finally {
 			clientResource.release();
 		}
@@ -181,7 +205,8 @@ public class AgetacClient {
 	}
 
 	public ActionDTO addAction(long interId, ActionDTO action) {
-		ClientResource clientResource = makeClientResource(getBaseAddress()	+ "/intervention/" + interId + "/action");
+		ClientResource clientResource = makeClientResource(getBaseAddress()
+				+ "/intervention/" + interId + "/action");
 		try {
 			ActionResource resource = clientResource.wrap(ActionResource.class);
 
@@ -191,40 +216,70 @@ public class AgetacClient {
 		}
 
 	}
-	
+
 	public Collection<MessageDTO> getMessages(long interId) {
 		ClientResource clientResource = makeClientResource(getBaseAddress()
 				+ "/intervention/" + interId + "/messages");
 		try {
-			MessagesResource resource = clientResource
-					.wrap(MessagesResource.class);
+			
+			Representation repr = clientResource.get();
 
-			return resource.retrieve();
+			TypeReference<Collection<MessageDTO>> tr = new TypeReference<Collection<MessageDTO>>() {
+			};
+			ObjectMapper mapper = new ObjectMapper();
+			Collection<MessageDTO> col = null;
+			try {
+				col = mapper.readValue(repr.getStream(), tr);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return col;
+			
 		} finally {
 			clientResource.release();
 		}
 	}
-	
+
 	public Collection<VehicleDTO> getVehicles(long interId) {
 		ClientResource clientResource = makeClientResource(getBaseAddress()
 				+ "/intervention/" + interId + "/vehicles");
 		try {
-			VehiclesResource resource = clientResource.wrap(VehiclesResource.class);
+			Representation repr = clientResource.get();
 
-			return resource.retrieve();
+			TypeReference<Collection<InterventionDTO>> tr = new TypeReference<Collection<InterventionDTO>>() {
+			};
+			ObjectMapper mapper = new ObjectMapper();
+			Collection<VehicleDTO> col = null;
+			try {
+				col = mapper.readValue(repr.getStream(), tr);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return col;
 		} finally {
 			clientResource.release();
 		}
 	}
-	
+
 	public Collection<ActionDTO> getActions(long interId) {
 		ClientResource clientResource = makeClientResource(getBaseAddress()
 				+ "/intervention/" + interId + "/actions");
 		try {
-			ActionsResource resource = clientResource
-					.wrap(ActionsResource.class);
+			Representation repr = clientResource.get();
 
-			return resource.retrieve();
+			TypeReference<Collection<ActionDTO>> tr = new TypeReference<Collection<ActionDTO>>() {
+			};
+			ObjectMapper mapper = new ObjectMapper();
+			Collection<ActionDTO> col = null;
+			try {
+				col = mapper.readValue(repr.getStream(), tr);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return col;
 		} finally {
 			clientResource.release();
 		}
@@ -234,10 +289,19 @@ public class AgetacClient {
 		ClientResource clientResource = makeClientResource(getBaseAddress()
 				+ "/intervention/" + interId + "/sources");
 		try {
-			SourcesResource resource = clientResource
-					.wrap(SourcesResource.class);
+			Representation repr = clientResource.get();
 
-			return resource.retrieve();
+			TypeReference<Collection<SourceDTO>> tr = new TypeReference<Collection<SourceDTO>>() {
+			};
+			ObjectMapper mapper = new ObjectMapper();
+			Collection<SourceDTO> col = null;
+			try {
+				col = mapper.readValue(repr.getStream(), tr);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return col;
 		} finally {
 			clientResource.release();
 		}
@@ -247,10 +311,19 @@ public class AgetacClient {
 		ClientResource clientResource = makeClientResource(getBaseAddress()
 				+ "/intervention/" + interId + "/targets");
 		try {
-			TargetsResource resource = clientResource
-					.wrap(TargetsResource.class);
+			Representation repr = clientResource.get();
 
-			return resource.retrieve();
+			TypeReference<Collection<TargetDTO>> tr = new TypeReference<Collection<TargetDTO>>() {
+			};
+			ObjectMapper mapper = new ObjectMapper();
+			Collection<TargetDTO> col = null;
+			try {
+				col = mapper.readValue(repr.getStream(), tr);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return col;
 		} finally {
 			clientResource.release();
 		}
@@ -260,10 +333,19 @@ public class AgetacClient {
 		ClientResource clientResource = makeClientResource(getBaseAddress()
 				+ "/intervention/" + interId + "/victims");
 		try {
-			VictimsResource resource = clientResource
-					.wrap(VictimsResource.class);
+			Representation repr = clientResource.get();
 
-			return resource.retrieve();
+			TypeReference<Collection<VictimDTO>> tr = new TypeReference<Collection<VictimDTO>>() {
+			};
+			ObjectMapper mapper = new ObjectMapper();
+			Collection<VictimDTO> col = null;
+			try {
+				col = mapper.readValue(repr.getStream(), tr);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return col;
 		} finally {
 			clientResource.release();
 		}
@@ -286,13 +368,14 @@ public class AgetacClient {
 		}
 
 	}
-	
+
 	public void updateVehicle(VehicleDTO vehicle) {
 
 		ClientResource clientResource = makeClientResource(getBaseAddress()
 				+ "/vehicle/" + vehicle.getId());
 		try {
-			VehicleResource resource = clientResource.wrap(VehicleResource.class);
+			VehicleResource resource = clientResource
+					.wrap(VehicleResource.class);
 
 			resource.update(vehicle);
 		} finally {
@@ -314,7 +397,8 @@ public class AgetacClient {
 	}
 
 	public void updateSource(SourceDTO source) {
-		ClientResource clientResource = makeClientResource(getBaseAddress() + "/source/" + source.getId());
+		ClientResource clientResource = makeClientResource(getBaseAddress()
+				+ "/source/" + source.getId());
 		try {
 			SourceResource resource = clientResource.wrap(SourceResource.class);
 
@@ -324,9 +408,10 @@ public class AgetacClient {
 		}
 
 	}
-	
+
 	public void updateAction(ActionDTO action) {
-		ClientResource clientResource = makeClientResource(getBaseAddress()	+ "/action/" + action.getId());
+		ClientResource clientResource = makeClientResource(getBaseAddress()
+				+ "/action/" + action.getId());
 		try {
 			ActionResource resource = clientResource.wrap(ActionResource.class);
 
@@ -336,11 +421,13 @@ public class AgetacClient {
 		}
 
 	}
-	
+
 	public void updateVehicleDemand(VehicleDemandDTO vd) {
-		ClientResource clientResource = makeClientResource(getBaseAddress()	+ "/vehicledemand/" + vd.getId());
+		ClientResource clientResource = makeClientResource(getBaseAddress()
+				+ "/vehicledemand/" + vd.getId());
 		try {
-			VehicleDemandResource resource = clientResource.wrap(VehicleDemandResource.class);
+			VehicleDemandResource resource = clientResource
+					.wrap(VehicleDemandResource.class);
 
 			resource.update(vd);
 		} finally {
@@ -384,7 +471,7 @@ public class AgetacClient {
 			clientResource.release();
 		}
 	}
-	
+
 	public void deleteVehicle(long id) {
 		ClientResource clientResource = makeClientResource(getBaseAddress()
 				+ "/vehicle/" + id);
@@ -396,7 +483,7 @@ public class AgetacClient {
 			clientResource.release();
 		}
 	}
-	
+
 	public void deleteAction(long id) {
 		ClientResource clientResource = makeClientResource(getBaseAddress()
 				+ "/action/" + id);
@@ -408,7 +495,7 @@ public class AgetacClient {
 			clientResource.release();
 		}
 	}
-	
+
 	public void deleteVehicleDemand(long id) {
 		ClientResource clientResource = makeClientResource(getBaseAddress()
 				+ "/vehicledemand/" + id);
@@ -435,9 +522,11 @@ public class AgetacClient {
 	}
 
 	public void updateIntervention(InterventionDTO intervention) {
-		ClientResource clientResource = makeClientResource(getBaseAddress()	+ "/intervention/" + intervention.getId());
+		ClientResource clientResource = makeClientResource(getBaseAddress()
+				+ "/intervention/" + intervention.getId());
 		try {
-			InterventionResource resource = clientResource.wrap(InterventionResource.class);
+			InterventionResource resource = clientResource
+					.wrap(InterventionResource.class);
 
 			resource.update(intervention);
 		} finally {
