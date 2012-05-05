@@ -18,6 +18,16 @@ public class VehicleDemandDTO implements IModel {
 	private String name;
 	private GroupDTO group;
 	
+	private String groupeHoraire;
+	
+	public String getGroupeHoraire() {
+		return groupeHoraire;
+	}
+
+	public void setGroupeHoraire(String groupeHoraire) {
+		this.groupeHoraire = groupeHoraire;
+	}
+
 	/** default vehicle id associated with the demand is unknown (-1)*/
 	private int vehicleId = -1;
 	

@@ -27,6 +27,40 @@ public class VehicleDTO implements IModel {
 	private BarrackDTO barrack;
 	private GroupDTO group;
 	
+	private String arrivalTime, retTime, demandTime;
+	
+	public String getArrivalTime() {
+		return arrivalTime;
+	}
+
+	public void setArrivalTime(String arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+
+	public String getRetTime() {
+		return retTime;
+	}
+
+	public void setRetTime(String retTime) {
+		this.retTime = retTime;
+	}
+
+	public String getDemandTime() {
+		return demandTime;
+	}
+
+	public void setDemandTime(String demandTime) {
+		this.demandTime = demandTime;
+	}
+
+	public MyObservable getObservable() {
+		return observable;
+	}
+
+	public void setObservable(MyObservable observable) {
+		this.observable = observable;
+	}
+
 	private MyObservable observable = new MyObservable();
 	
 	public VehicleDTO() {}
