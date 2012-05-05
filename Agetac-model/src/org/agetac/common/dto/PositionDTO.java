@@ -48,4 +48,9 @@ public class PositionDTO {
 	public void setKnown(boolean isKnown) {
 		this.isKnown = isKnown;
 	}
+	
+	@Override
+	public String toString() {
+		return "("+latitude + ", "+longitude+")";
+	}
 }
