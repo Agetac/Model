@@ -247,7 +247,7 @@ public class AgetacClient {
 		try {
 			Representation repr = clientResource.get();
 
-			TypeReference<Collection<InterventionDTO>> tr = new TypeReference<Collection<InterventionDTO>>() {
+			TypeReference<Collection<VehicleDTO>> tr = new TypeReference<Collection<VehicleDTO>>() {
 			};
 			ObjectMapper mapper = new ObjectMapper();
 			Collection<VehicleDTO> col = null;

@@ -3,6 +3,7 @@ package org.agetac.common.dto;
 import java.util.Observer;
 
 import org.agetac.common.observer.MyObservable;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 
 public class VehicleDTO implements IModel {
@@ -61,6 +62,7 @@ public class VehicleDTO implements IModel {
 		this.observable = observable;
 	}
 
+	@JsonIgnore
 	private MyObservable observable = new MyObservable();
 	
 	public VehicleDTO() {}
