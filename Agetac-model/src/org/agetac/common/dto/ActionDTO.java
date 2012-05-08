@@ -7,7 +7,7 @@ import org.agetac.common.observer.MyObservable;
 
 public class ActionDTO implements IModel {
 
-	public enum ActionType {WATER, FIRE, HUMAN}
+	public enum ActionType {WATER, FIRE, HUMAN, CHEM}
 	
 	private long id;
 	private String name = "";
