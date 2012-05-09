@@ -28,10 +28,12 @@ public class ActionDTO implements IModel {
 		this.name = n;
 		this.type = t;
 		this.position = p;
+		this.origin = p;
 		this.aim = a;
 	}
 	
 	public ActionDTO(PositionDTO p, ActionType t, PositionDTO origin, PositionDTO aim) {
+		this.name = "action";
 		this.position = p;
 		this.type = t;
 		this.origin = origin;
