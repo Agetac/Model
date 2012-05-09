@@ -21,7 +21,7 @@ public class Client {
 
 	public static void main(String[] args) {
 
-		AgetacClient c = new AgetacClient("192.168.0.1", 8888);
+		AgetacClient c = new AgetacClient("localhost", 8888);
 		
 		// Create new intervention.
 		InterventionDTO intervention = c.createIntervention();
