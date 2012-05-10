@@ -11,22 +11,12 @@ public class VehicleDemandDTO implements IModel {
 	public enum DemandState {ASKED, REFUSED, ACCEPTED}
 	
 	private long id;
-	private Date timestamp;
+	private Date groupeHoraire;
 	private DemandState state;
 	private PositionDTO position;
 	private VehicleType type;
 	private String name;
 	private GroupDTO group;
-	
-	private String groupeHoraire;
-	
-	public String getGroupeHoraire() {
-		return groupeHoraire;
-	}
-
-	public void setGroupeHoraire(String groupeHoraire) {
-		this.groupeHoraire = groupeHoraire;
-	}
 
 	/** default vehicle id associated with the demand is unknown (-1)*/
 	private int vehicleId = -1;
@@ -39,7 +29,7 @@ public class VehicleDemandDTO implements IModel {
 		this.state = s;
 		this.type = t;
 		this.position = p;
-		this.timestamp = date;
+		this.groupeHoraire = date;
 	}
 	
 	public VehicleDemandDTO(String n, PositionDTO p, DemandState s, GroupDTO g) {
@@ -55,12 +45,12 @@ public class VehicleDemandDTO implements IModel {
 		return id;
 	}
 	
-	public Date getTimestamp() {
-		return timestamp;
+	public Date getGroupeHoraire() {
+		return groupeHoraire;
 	}
 
-	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
+	public void setGroupeHoraire(Date groupeHoraire) {
+		this.groupeHoraire = groupeHoraire;
 		observable.setChanged();
 		observable.notifyObservers(this);
 	}

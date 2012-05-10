@@ -1,5 +1,6 @@
 package org.agetac.common.dto;
 
+import java.util.Date;
 import java.util.Observer;
 
 import org.agetac.common.observer.MyObservable;
@@ -28,30 +29,36 @@ public class VehicleDTO implements IModel {
 	private BarrackDTO barrack;
 	private GroupDTO group;
 	
-	private String arrivalTime, retTime, demandTime;
+	private Date arrivalTime, retTime, demandTime;
 	
-	public String getArrivalTime() {
+	public Date getArrivalTime() {
 		return arrivalTime;
 	}
 
-	public void setArrivalTime(String arrivalTime) {
+	public void setArrivalTime(Date arrivalTime) {
 		this.arrivalTime = arrivalTime;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
-	public String getRetTime() {
+	public Date getRetTime() {
 		return retTime;
 	}
 
-	public void setRetTime(String retTime) {
+	public void setRetTime(Date retTime) {
 		this.retTime = retTime;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
-	public String getDemandTime() {
+	public Date getDemandTime() {
 		return demandTime;
 	}
 
-	public void setDemandTime(String demandTime) {
+	public void setDemandTime(Date demandTime) {
 		this.demandTime = demandTime;
+		observable.setChanged();
+		observable.notifyObservers(this);
 	}
 
 	public MyObservable getObservable() {

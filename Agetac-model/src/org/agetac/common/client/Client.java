@@ -158,7 +158,7 @@ public class Client {
 		vd.setState(DemandState.ASKED);
 		vd.setType(VehicleType.BLS);
 		vd.setName("Foo");
-		vd.setTimestamp(new Date());
+		vd.setGroupeHoraire(new Date());
 		c.addVehicleDemand(interId, vd);
 
 		// Print the number of vehicle demands for this intervention.
